@@ -1,6 +1,6 @@
 const axios = require('axios');
 const db = require("quick.db")
-const Discord = require("discord.js");
+const Discord = require('../../util/compat/discord.js');
 const ms = require("ms")
 
 module.exports = (client, message) => {

@@ -1,29 +1,31 @@
-const {
-    readdirSync
-} = require('fs');
+const Discord = require('./compat/discord.js');
+const logs = require('discord-logs');
+const tempo = require('./gestion/tempo.js');
 
 const login = (client) => {
-    const Discord = require("discord.js")
-    const logs = require('discord-logs');
-    logs(client)
-    const disbut = require('discord-buttons');
-    disbut(client);
-    const tempo = require("./gestion/tempo.js");
-    tempo(client)
+  logs(client);
+  tempo(client);
 
-    client.config = require("../config.json")
-    client.cooldown = new Array();
-    client.interaction = {}
-    client.guildInvites = new Map();
-    client.queue = new Map();
-    client.commands = new Discord.Collection()
-    client.aliases = new Discord.Collection()
-    client.snipes = new Map()
-    client.inter = new Array()
+  client.config = require('../config.json');
+  client.cooldown = [];
+  client.interaction = {};
+  client.guildInvites = new Map();
+  client.queue = new Map();
+  client.commands = new Discord.Collection();
+  client.aliases = new Discord.Collection();
+  client.snipes = new Map();
+  client.inter = [];
 
-    client.login("MTI2NzIxOTc0Mzc0NDQ2Mjk2OQ.GhWhjC.eoDVe6LLy1djlyaFHsiDht-RNOgZIEgij42ekg");
-}
+  const token = process.env.DISCORD_TOKEN;
+  if (!token) {
+    console.warn("[auth] DISCORD_TOKEN manquant. Ajoutez-le dans votre environnement avant de lancer le bot.");
+    console.warn("[auth] L'ancien token exposé dans l'historique doit être régénéré dans le Discord Developer Portal.");
+    return;
+  }
 
-module.exports = {
-    login
-}
+  client.login(token).catch((error) => {
+    console.error('[auth] Connexion Discord impossible:', error.message);
+  });
+};
+
+module.exports = { login };

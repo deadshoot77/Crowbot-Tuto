@@ -1,11 +1,11 @@
-const Discord = require('discord.js')
+const Discord = require('../../util/compat/discord.js')
 const db = require('quick.db')
 const {
 	MessageActionRow,
 	MessageButton,
 	MessageMenuOption,
 	MessageMenu
-} = require('discord-buttons');
+} = require('../../util/compat/discord-components.js');
 
 module.exports = {
 	name: 'addrole',

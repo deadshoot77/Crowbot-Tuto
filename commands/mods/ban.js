@@ -1,7 +1,7 @@
-const Discord = require("discord.js"),
+const Discord = require('../../util/compat/discord.js'),
 	{
-		MessageEmbed
-	} = require("discord.js"),
+		EmbedBuilder
+	} = require('../../util/compat/discord.js'),
 
 	ms = require("ms"),
 	cooldown = {}
@@ -101,7 +101,7 @@ module.exports = {
 							user.send(`Vous avez été **ban** de **${message.guild.name}** pour \`${reason}\``)
 
 							if (logsmod) logsmod.send(
-								new Discord.MessageEmbed()
+								new Discord.EmbedBuilder()
 								//.setAuthor(message.author.tag, message.author.displayAvatarURL({dynamic: true}))
 								.setColor(color)
 								//.setTitle(`<:protection:847072581382438953> Modération • Type: **\`bannissement\`**`)
@@ -117,7 +117,7 @@ module.exports = {
 							user.send(`Vous avez été **ban ${args[1]}** de **${message.guild.name}**`)
 
 							if (logsmod) logsmod.send(
-								new Discord.MessageEmbed()
+								new Discord.EmbedBuilder()
 								// .setAuthor(message.author.tag, message.author.displayAvatarURL({dynamic: true}))
 								.setColor(color)
 								// .setTitle(`<:protection:847072581382438953> Modération • Type: **\`bannissement\`**`)
@@ -140,7 +140,7 @@ module.exports = {
 							user.send(`Vous avez été **ban** de **${message.guild.name}** pour \`${reason}\``)
 
 							if (logsmod) logsmod.send(
-								new Discord.MessageEmbed()
+								new Discord.EmbedBuilder()
 								// .setAuthor(message.author.tag, message.author.displayAvatarURL({dynamic: true}))
 								.setColor(color)
 								//.setTitle(`<:protection:847072581382438953> Modération • Type: **\`bannissement\`**`)
@@ -157,7 +157,7 @@ module.exports = {
 							user.send(`Vous avez été **ban** de **${message.guild.name}**`)
 
 							if (logsmod) logsmod.send(
-								new Discord.MessageEmbed()
+								new Discord.EmbedBuilder()
 								//       .setAuthor(message.author.tag, message.author.displayAvatarURL({dynamic: true}))
 								.setColor(color)
 								//   .setTitle(`<:protection:847072581382438953> Modération • Type: **\`bannissement\`**`)
@@ -176,7 +176,7 @@ module.exports = {
 					user.send(`Vous avez été **ban** de **${message.guild.name}**`)
 
 					if (logsmod) logsmod.send(
-						new Discord.MessageEmbed()
+						new Discord.EmbedBuilder()
 						//        .setAuthor(message.author.tag, message.author.displayAvatarURL({dynamic: true}))
 						.setColor(color)
 						//      .setTitle(`<:protection:847072581382438953> Modération • Type: **\`bannissement\`**`)
@@ -200,7 +200,7 @@ module.exports = {
 								user.send(`Vous avez été **ban** de **${message.guild.name}** pour \`${reason}\``)
 								bantimereason(message, user, time, authorcooldown, reason)
 								if (logsmod) logsmod.send(
-									new Discord.MessageEmbed()
+									new Discord.EmbedBuilder()
 									//  .setAuthor(message.author.tag, message.author.displayAvatarURL({dynamic: true}))
 									.setColor(color)
 									//              .setTitle(`<:protection:847072581382438953> Modération • Type: **\`bannissement\`**`)
@@ -215,7 +215,7 @@ module.exports = {
 								user.send(`Vous avez été **ban** de **${message.guild.name}**`)
 								bantime(message, user, time, authorcooldown)
 								if (logsmod) logsmod.send(
-									new Discord.MessageEmbed()
+									new Discord.EmbedBuilder()
 									//.setAuthor(message.author.tag, message.author.displayAvatarURL({dynamic: true}))
 									//  .setColor(color)
 									//        .setTitle(`<:protection:847072581382438953> Modération • Type: **\`bannissement\`**`)
@@ -236,7 +236,7 @@ module.exports = {
 								user.send(`Vous avez été **ban** de **${message.guild.name}** pour \`${reason}\``)
 								banreason(message, user, authorcooldown, reason)
 								if (logsmod) logsmod.send(
-									new Discord.MessageEmbed()
+									new Discord.EmbedBuilder()
 									//             .setAuthor(message.author.tag, message.author.displayAvatarURL({dynamic: true}))
 									.setColor(color)
 									//           .setTitle(`<:protection:847072581382438953> Modération • Type: **\`bannissement\`**`)
@@ -251,7 +251,7 @@ module.exports = {
 								user.send(`Vous avez été **ban** de **${message.guild.name}**`)
 								ban(message, user, authorcooldown)
 								if (logsmod) logsmod.send(
-									new Discord.MessageEmbed()
+									new Discord.EmbedBuilder()
 									//           .setAuthor(message.author.tag, message.author.displayAvatarURL({dynamic: true}))
 									//         .setColor(color)
 									//       .setTitle(`<:protection:847072581382438953> Modération • Type: **\`bannissement\`**`)
@@ -268,7 +268,7 @@ module.exports = {
 						user.send(`Vous avez été **ban** de **${message.guild.name}**`)
 						ban(message, user, authorcooldown)
 						if (logsmod) logsmod.send(
-							new Discord.MessageEmbed()
+							new Discord.EmbedBuilder()
 							// .setAuthor(message.author.tag, message.author.displayAvatarURL({dynamic: true}))
 							.setColor(color)
 							//        .setTitle(`<:protection:847072581382438953> Modération • Type: **\`bannissement\`**`)

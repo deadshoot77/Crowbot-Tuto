@@ -1,4 +1,4 @@
-const Discord = require('discord.js')
+const Discord = require('../../util/compat/discord.js')
 const db = require('quick.db')
 const ms = require("ms")
 const {
@@ -6,7 +6,7 @@ const {
     MessageButton,
     MessageMenuOption,
     MessageMenu
-} = require('discord-buttons');
+} = require('../../util/compat/discord-components.js');
 const cooldown = {}
 
 module.exports = {
@@ -41,7 +41,7 @@ module.exports = {
                             message.channel.send(`${bans.size} ${bans.size > 1 ? "utilisateurs ont": "utilisateur a"} été unban`);
                             if (logsmod) logsmod.send(
 
-                                new Discord.MessageEmbed()
+                                new Discord.EmbedBuilder()
                                 //.setAuthor(message.author.tag, message.author.displayAvatarURL({dynamic: true}))
                                 .setColor(color)
                                 //.setTitle(`<:protection:847072581382438953> Modération • Type: **\`bannissement\`**`)
@@ -84,7 +84,7 @@ module.exports = {
                 message.guild.members.unban(user.id, `Unban par ${message.author.tag}`)
                 message.channel.send(`<@${user.id}> n'est plus **banni**`);
                 if (logsmod) logsmod.send(
-                    new Discord.MessageEmbed()
+                    new Discord.EmbedBuilder()
                     // .setAuthor(message.author.tag, message.author.displayAvatarURL({dynamic: true}))
                     .setColor(color)
                     //        .setTitle(`<:protection:847072581382438953> Modération • Type: **\`bannissement\`**`)

@@ -1,11 +1,11 @@
-const Discord = require('discord.js')
+const Discord = require('../../util/compat/discord.js')
 const db = require('quick.db')
 const {
 	MessageActionRow,
 	MessageButton,
 	MessageMenuOption,
 	MessageMenu
-} = require('discord-buttons');
+} = require('../../util/compat/discord-components.js');
 
 
 module.exports = {
@@ -135,7 +135,7 @@ module.exports = {
 
 					if (message.guild.roles.cache.get(gvwt[i].ID.split('_')[2])) gvw += `${message.guild.roles.cache.get(gvwt[i].ID.split('_')[2]) ? "<@&" + message.guild.roles.cache.get(gvwt[i].ID.split('_')[2]).id + ">\n" : ":x:"}`;
 				}
-				const embed = new Discord.MessageEmbed()
+				const embed = new Discord.EmbedBuilder()
 					.setColor(color)
 					.setTitle("Permission Du Serveur")
 					.setTimestamp()

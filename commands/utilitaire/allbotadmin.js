@@ -1,14 +1,14 @@
-const Discord = require('discord.js')
+const Discord = require('../../util/compat/discord.js')
 const {
-	MessageEmbed
-} = require('discord.js')
+	EmbedBuilder
+} = require('../../util/compat/discord.js')
 const db = require('quick.db')
 const {
 	MessageActionRow,
 	MessageButton,
 	MessageMenuOption,
 	MessageMenu
-} = require('discord-buttons');
+} = require('../../util/compat/discord-components.js');
 
 function sleep(ms) {
 	return new Promise((resolve) => {
@@ -29,14 +29,14 @@ module.exports = {
 		if (client.config.owner.includes(message.author.id) || db.get(`ownermd_${client.user.id}_${message.author.id}`) === true || perm) {
 
 			var str_filtrer = message.guild.members.cache.filter(member => member.hasPermission("ADMINISTRATOR") && member.user.bot)
-			if (str_filtrer.size === 0 || undefined || false || null) return message.channel.send(new Discord.MessageEmbed().setColor(color).setFooter(`${client.config.name}`).setTitle("Aucun bot admins présents"))
+			if (str_filtrer.size === 0 || undefined || false || null) return message.channel.send(new Discord.EmbedBuilder().setColor(color).setFooter(`${client.config.name}`).setTitle("Aucun bot admins présents"))
 
 
 			let p0 = 0;
 			let p1 = 5;
 			let page = 1;
 
-			const embed = new Discord.MessageEmbed()
+			const embed = new Discord.EmbedBuilder()
 				.setTitle('Liste des bots admins présents')
 				.setDescription(str_filtrer
 					.map(r => r)
@@ -72,7 +72,7 @@ module.exports = {
 					setTimeout(() => {
 						tdata.edit("", {
 							components: [],
-							embed: new Discord.MessageEmbed()
+							embed: new Discord.EmbedBuilder()
 								.setTitle('Liste des bots admins présents')
 								.setDescription(str_filtrer
 									.map(r => r)

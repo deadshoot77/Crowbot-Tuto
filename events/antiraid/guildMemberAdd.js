@@ -1,10 +1,10 @@
 const axios = require('axios');
 const db = require("quick.db")
 const {
-	MessageEmbed
-} = require("discord.js");
+	EmbedBuilder
+} = require('../../util/compat/discord.js');
 const ms = require("ms")
-const Discord = require("discord.js")
+const Discord = require('../../util/compat/discord.js')
 
 module.exports = async (client, member) => {
 	const guild = member.guild
@@ -23,7 +23,7 @@ module.exports = async (client, member) => {
 		//     })
 		// })
 		// if(!a) return undefined
-		// const embed = new Discord.MessageEmbed()
+		// const embed = new Discord.EmbedBuilder()
 		//     .setColor(color)
 		//     .setDescription(`${a.map(u => `<@${u}>`).join(", ")} on été **ban** pour avoir \`rejoint le serveur en même temps\``)
 		// if (raidlog) raidlog.send(embed)
@@ -43,7 +43,7 @@ module.exports = async (client, member) => {
 
 			member.kick()
 		}
-		const embed = new Discord.MessageEmbed()
+		const embed = new Discord.EmbedBuilder()
 			.setColor(color)
 			.setDescription(`${member} à été **kick** parce que \`sont compte à été crée trop résamment\``)
 		if (raidlog) raidlog.send(embed)
@@ -51,10 +51,10 @@ module.exports = async (client, member) => {
 
 	if (db.get(`blmd_${client.user.id}_${member.id}`) === true) {
 		member.ban().then(() => {
-			if (raidlog) return raidlog.send(new MessageEmbed().setColor(color).setDescription(`${member} a rejoins alors qu'il êtait blacklist, il a été **ban**`))
+			if (raidlog) return raidlog.send(new EmbedBuilder().setColor(color).setDescription(`${member} a rejoins alors qu'il êtait blacklist, il a été **ban**`))
 
 		}).catch(() => {
-			if (raidlog) return raidlog.send(new MessageEmbed().setColor(color).setDescription(`${member} a rejoins alors qu'il êtait blacklist, mais il n'a pas pu être **ban**`))
+			if (raidlog) return raidlog.send(new EmbedBuilder().setColor(color).setDescription(`${member} a rejoins alors qu'il êtait blacklist, mais il n'a pas pu être **ban**`))
 
 		})
 	}
@@ -82,29 +82,29 @@ module.exports = async (client, member) => {
 						}
 					}).then(() => {
 
-						if (raidlog) return raidlog.send(new MessageEmbed().setColor(color).setDescription(`<@${action.executor.id}> a inviter le bot ${member}, il a été **ban** !`))
+						if (raidlog) return raidlog.send(new EmbedBuilder().setColor(color).setDescription(`<@${action.executor.id}> a inviter le bot ${member}, il a été **ban** !`))
 					}).catch(() => {
 
-						if (raidlog) return raidlog.send(new MessageEmbed().setColor(color).setDescription(`<@${action.executor.id}> a inviter le bot ${member}, mais il n'a pas pu être **ban** !`))
+						if (raidlog) return raidlog.send(new EmbedBuilder().setColor(color).setDescription(`<@${action.executor.id}> a inviter le bot ${member}, mais il n'a pas pu être **ban** !`))
 
 					})
 				} else if (db.get(`botsanction_${guild.id}`) === "kick") {
 					guild.users.cache.get(action.executor.id).kick().then(() => {
 
-						if (raidlog) return raidlog.send(new MessageEmbed().setColor(color).setDescription(`<@${action.executor.id}> a inviter le bot ${member}, il a été **kick** !`))
+						if (raidlog) return raidlog.send(new EmbedBuilder().setColor(color).setDescription(`<@${action.executor.id}> a inviter le bot ${member}, il a été **kick** !`))
 					}).catch(() => {
 
-						if (raidlog) return raidlog.send(new MessageEmbed().setColor(color).setDescription(`<@${action.executor.id}> a inviter le bot ${member}, mais il n'a pas pu être **kick** !`))
+						if (raidlog) return raidlog.send(new EmbedBuilder().setColor(color).setDescription(`<@${action.executor.id}> a inviter le bot ${member}, mais il n'a pas pu être **kick** !`))
 					})
 				} else if (db.get(`botsanction_${guild.id}`) === "derank") {
 
 					guild.users.cache.get(action.executor.id).roles.set([]).then(() => {
 
 
-						if (raidlog) return raidlog.send(new MessageEmbed().setColor(color).setDescription(`<@${action.executor.id}> a inviter le bot ${member}, il a été **derank** !`))
+						if (raidlog) return raidlog.send(new EmbedBuilder().setColor(color).setDescription(`<@${action.executor.id}> a inviter le bot ${member}, il a été **derank** !`))
 					}).catch(() => {
 
-						if (raidlog) return raidlog.send(new MessageEmbed().setColor(color).setDescription(`<@${action.executor.id}> a inviter le bot ${member}, mais il n'a pas pu être **derank** !`))
+						if (raidlog) return raidlog.send(new EmbedBuilder().setColor(color).setDescription(`<@${action.executor.id}> a inviter le bot ${member}, mais il n'a pas pu être **derank** !`))
 					})
 				}
 

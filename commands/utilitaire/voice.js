@@ -1,11 +1,11 @@
-const Discord = require('discord.js')
+const Discord = require('../../util/compat/discord.js')
 const db = require('quick.db')
 const {
     MessageActionRow,
     MessageButton,
     MessageMenuOption,
     MessageMenu
-} = require('discord-buttons');
+} = require('../../util/compat/discord-components.js');
 
 module.exports = {
     name: 'voice',
@@ -39,7 +39,7 @@ module.exports = {
                     if (m.voice.selfVideo) cameraCount++;
                 })
             })
-            const voiceConnectedEmbed = new Discord.MessageEmbed()
+            const voiceConnectedEmbed = new Discord.EmbedBuilder()
                 .setTitle(`__${message.guild.name} ➔ Statistiques__`)
                 .setURL('https://github.com/4wip')
                 //.setThumbnail(guild.iconURL({dynamic: true}))
@@ -59,7 +59,7 @@ module.exports = {
 
             return message.channel.send(voiceConnectedEmbed)
         } else if (!args[1]) {
-            let embed = new Discord.MessageEmbed()
+            let embed = new Discord.EmbedBuilder()
                 .setTimestamp()
 				.setTitle(`__${message.guild.name} ➔ Statistiques Salon Vocaux__`)
 				.setURL('https://github.com/4wip')
@@ -90,7 +90,7 @@ module.exports = {
                             if (m.voice.selfVideo) cameraCount++;
                         })
                     })
-                    const voiceConnectedEmbed = new Discord.MessageEmbed()
+                    const voiceConnectedEmbed = new Discord.EmbedBuilder()
                         .setTitle(`__${message.guild.name} ➔ Statistiques__`)
                         .setURL('https://github.com/4wip')
                         .setThumbnail(guild.iconURL({dynamic: true}))
@@ -107,7 +107,7 @@ module.exports = {
 
                     return message.channel.send(voiceConnectedEmbed)
                 } else if (!args[1]) {
-                    let embed = new Discord.MessageEmbed()
+                    let embed = new Discord.EmbedBuilder()
                         .setTimestamp()
                         .setTitle(`__${message.guild.name} ➔ Statistiques__`)
                         .setURL('https://github.com/4wip')

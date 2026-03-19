@@ -1,14 +1,14 @@
-const Discord = require('discord.js')
+const Discord = require('../../util/compat/discord.js')
 const db = require('quick.db')
 const {
 	MessageActionRow,
 	MessageButton,
 	MessageMenuOption,
 	MessageMenu
-} = require('discord-buttons');
+} = require('../../util/compat/discord-components.js');
 const {
-	MessageEmbed
-} = require("discord.js")
+	EmbedBuilder
+} = require('../../util/compat/discord.js')
 
 function sleep(ms) {
 	return new Promise((resolve) => {
@@ -32,14 +32,14 @@ module.exports = {
 			let Muted = await db.fetch(`mRole_${message.guild.id}`);
 			let muteRole = await message.guild.roles.cache.get(Muted) || message.guild.roles.cache.find(role => role.name === `muet`) || message.guild.roles.cache.find(role => role.name === `Muted`) || message.guild.roles.cache.find(role => role.name === `Mute`)
 
-			if (!muteRole) return message.channel.send(new Discord.MessageEmbed().setColor(color).setTitle("Aucun mute en cours"))
-			if (muteRole.members.size === 0 || undefined || false || null) return message.channel.send(new Discord.MessageEmbed().setColor(color).setFooter(`${client.config.name}`).setTitle("Aucun mute en cours"))
+			if (!muteRole) return message.channel.send(new Discord.EmbedBuilder().setColor(color).setTitle("Aucun mute en cours"))
+			if (muteRole.members.size === 0 || undefined || false || null) return message.channel.send(new Discord.EmbedBuilder().setColor(color).setFooter(`${client.config.name}`).setTitle("Aucun mute en cours"))
 
 			let p0 = 0;
 			let p1 = 5;
 			let page = 1;
 
-			const embed = new Discord.MessageEmbed()
+			const embed = new Discord.EmbedBuilder()
 				.setTitle('Mute en cours')
 				.setDescription(muteRole.members
 					.map(r => r)
@@ -74,7 +74,7 @@ module.exports = {
 					setTimeout(() => {
 						tdata.edit("", {
 							components: [],
-							embed: new Discord.MessageEmbed()
+							embed: new Discord.EmbedBuilder()
 								.setTitle('Mute en cours')
 								.setDescription(muteRole.members
 									.map(r => r)

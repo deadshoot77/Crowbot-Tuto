@@ -1,4 +1,4 @@
-const Discord = require('discord.js')
+const Discord = require('../../util/compat/discord.js')
 const db = require('quick.db')
 const {
     MessageActionRow,
@@ -6,7 +6,7 @@ const {
     MessageMenuOption,
     MessageMenu,
     ButtonCollector
-} = require('discord-buttons');
+} = require('../../util/compat/discord-components.js');
 
 function bttcolor(color) {
     if (color === null || !color || color === undefined) return `Bleu`
@@ -24,7 +24,7 @@ module.exports = {
         function updateembed(msg) {
 
             if (db.get(`rolemenustyle_${message.guild.id}`) === "Réactions" || db.get(`rolemenustyle_${message.guild.id}`) === null) {
-                let embed = new Discord.MessageEmbed()
+                let embed = new Discord.EmbedBuilder()
                 embed.setTitle(`Configuration Rolemenu`)
                 embed.setColor(color)
                 embed.setTimestamp()
@@ -97,7 +97,7 @@ module.exports = {
                 })
 
             } else if (db.get(`rolemenustyle_${message.guild.id}`) === "Boutons" || db.get(`rolemenustyle_${message.guild.id}`) === null) {
-                let embed = new Discord.MessageEmbed()
+                let embed = new Discord.EmbedBuilder()
                 embed.setTitle(`Configuration Rolemenu`)
                 embed.setColor(color)
                 embed.setTimestamp()
@@ -276,7 +276,7 @@ module.exports = {
 
                                 mmm.edit({
                                     button: [buttonmenu],
-                                    embed: new Discord.MessageEmbed(mmm.embeds[0])
+                                    embed: new Discord.EmbedBuilder(mmm.embeds[0])
                                 }).catch(() => {
                                     return message.channel.send(`Ce message n'est pas de moi, je ne peux pas créer de menu de ce style dessus`)
 

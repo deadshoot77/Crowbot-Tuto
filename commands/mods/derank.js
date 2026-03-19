@@ -1,11 +1,11 @@
-const Discord = require('discord.js')
+const Discord = require('../../util/compat/discord.js')
 const db = require('quick.db')
 const {
 	MessageActionRow,
 	MessageButton,
 	MessageMenuOption,
 	MessageMenu
-} = require('discord-buttons');
+} = require('../../util/compat/discord-components.js');
 
 module.exports = {
 	name: 'derank',
@@ -37,7 +37,7 @@ module.exports = {
 					user.roles.set([], `Derank par ${message.author.tag}`).catch(err => {})
 					let wass = db.get(`logmod_${message.guild.id}`);
 					const logschannel = message.guild.channels.cache.get(wass)
-					if (logschannel) logschannel.send(new Discord.MessageEmbed()
+					if (logschannel) logschannel.send(new Discord.EmbedBuilder()
 						//         .setAuthor(message.author.tag, message.author.displayAvatarURL({dynamic: true}))
 						.setColor(color)
 						//       .setTitle(`<:protection:847072581382438953> Modération • Type: **\`derank\`**`)

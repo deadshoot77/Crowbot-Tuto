@@ -1,4 +1,4 @@
-const { MessageEmbed } = require("discord.js")
+const { EmbedBuilder } = require('../../util/compat/discord.js')
 const db = require("quick.db")
 let random_string = require("randomstring");
 function sleep(ms) {
@@ -51,7 +51,7 @@ module.exports = {
                     message.channel.send(`${user} a été **warn**`);
                     user.send(`Vous avez été **warn** sur ${message.guild.name}`)
 
-                    logschannel.send(new MessageEmbed()
+                    logschannel.send(new EmbedBuilder()
                         //.setAuthor(message.author.tag, message.author.displayAvatarURL({dynamic: true}))
                         .setColor(color)
                         // .setTitle(`<:protection:847072581382438953> Modération • Type: **\`expulsion\`**`)
@@ -63,7 +63,7 @@ module.exports = {
                     message.channel.send(`${user} a été **warn** pour \`${res}\``);
                     user.send(`Vous avez été **warn** sur ${message.guild.name} pour \`${res}\``)
 
-                    logschannel.send(new MessageEmbed()
+                    logschannel.send(new EmbedBuilder()
                         //.setAuthor(message.author.tag, message.author.displayAvatarURL({dynamic: true}))
                         .setColor(color)
                         // .setTitle(`<:protection:847072581382438953> Modération • Type: **\`expulsion\`**`)
@@ -90,7 +90,7 @@ module.exports = {
 
 
 
-                const embed = new MessageEmbed()
+                const embed = new EmbedBuilder()
                 embed.setTitle(`Liste des sanctions de ${user.tag} (**${number}**)`)
                     .setDescription(warnInfo
                         .map(r => r)
@@ -118,7 +118,7 @@ module.exports = {
                         tdata.edit("", { embed: embed, components: [bts] })
                         setTimeout(() => {
                             tdata.edit("", {
-                                components: [], embed: new Discord.MessageEmbed()
+                                components: [], embed: new Discord.EmbedBuilder()
                                     .setTitle(`Liste des sanctions de ${user.tag} (**${number}**)`)
                                     .setDescription(money
                                         .map(r => r)

@@ -1,7 +1,7 @@
-const Discord = require('discord.js')
+const Discord = require('../../util/compat/discord.js')
 const db = require('quick.db')
-const { MessageActionRow, MessageButton, MessageMenuOption, MessageMenu } = require('discord-buttons');
-const {MessageEmbed} = require("discord.js")
+const { MessageActionRow, MessageButton, MessageMenuOption, MessageMenu } = require('../../util/compat/discord-components.js');
+const {EmbedBuilder} = require('../../util/compat/discord.js')
 function sleep(ms) {
     return new Promise((resolve) => {
       setTimeout(resolve, ms)})}
@@ -28,9 +28,9 @@ module.exports = {
                   user: ``
                 }));
                 const bList = Array.from(obj);
-                if (bList.length < 1) return message.channel.send(new Discord.MessageEmbed().setColor(color).setTitle("Aucun ban en cours"))
+                if (bList.length < 1) return message.channel.send(new Discord.EmbedBuilder().setColor(color).setTitle("Aucun ban en cours"))
     
-            const embed = new Discord.MessageEmbed()
+            const embed = new Discord.EmbedBuilder()
                 .setTitle('Ban en cours')
                 .setDescription(bans
                     .map(r => r)
@@ -61,7 +61,7 @@ module.exports = {
                     tdata.edit("", { embed: embed, components: [bts] })
                     setTimeout(() => {
                         tdata.edit("", {
-                            components: [], embed: new Discord.MessageEmbed()
+                            components: [], embed: new Discord.EmbedBuilder()
                                 .setTitle('Ban en cours')
                                 .setDescription(bans
                                     .map(r => r)

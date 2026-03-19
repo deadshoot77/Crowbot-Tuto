@@ -1,14 +1,14 @@
-const Discord = require('discord.js')
+const Discord = require('../../util/compat/discord.js')
 const db = require('quick.db')
 const {
 	MessageActionRow,
 	MessageButton,
 	MessageMenuOption,
 	MessageMenu
-} = require('discord-buttons');
+} = require('../../util/compat/discord-components.js');
 const {
-	MessageEmbed
-} = require("discord.js")
+	EmbedBuilder
+} = require('../../util/compat/discord.js')
 
 module.exports = {
 	name: 'muterole',
@@ -25,12 +25,12 @@ module.exports = {
 
 			let muterole = await message.guild.roles.cache.get(Muted) || message.guild.roles.cache.find(role => role.name === `muet`) || message.guild.roles.cache.find(role => role.name === `Muted`) || message.guild.roles.cache.find(role => role.name === `Mute`)
 			if (muterole) {
-				const embed = new Discord.MessageEmbed()
+				const embed = new Discord.EmbedBuilder()
 				embed.setColor(color)
 				embed.setFooter(`${client.config.name}`)
 				embed.setDescription(`**Il existe déjà un rôle muet : <@&${muterole.id}>**\nVérification des permissions du rôles muet en cours`)
 				message.channel.send(embed).then(async mm => {
-					const embed2 = new Discord.MessageEmbed()
+					const embed2 = new Discord.EmbedBuilder()
 					embed2.setTitle("Les permissions du rôle muet ont été mises à jour")
 					embed2.setColor(color)
 					embed2.setFooter(`${client.config.name}`)
@@ -54,7 +54,7 @@ module.exports = {
 				return;
 			}
 			if (!muterole) {
-				const embed = new Discord.MessageEmbed()
+				const embed = new Discord.EmbedBuilder()
 				embed.setColor(color)
 				embed.setTitle(`Création d'un rôle muet`)
 				message.channel.send(embed).then(async m => {
@@ -70,7 +70,7 @@ module.exports = {
 						ADD_REACTIONS: false
 					}, "Muterole"))
 					db.set(`mRole_${message.guild.id}`, `${muterole.id}`)
-					const e = new Discord.MessageEmbed()
+					const e = new Discord.EmbedBuilder()
 					e.setColor(color)
 					e.setDescription(`***Rôle muet créé :*** ${muterole}`)
 					return m.edit("", e)

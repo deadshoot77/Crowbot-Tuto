@@ -1,6 +1,6 @@
 const axios = require('axios');
 const db = require("quick.db")
-const Discord = require("discord.js");
+const Discord = require('../../util/compat/discord.js');
 const ms = require("ms")
 
 module.exports = async (client, oldMessage, newMessage) => {
@@ -10,7 +10,7 @@ module.exports = async (client, oldMessage, newMessage) => {
 	let wass = db.get(`msglog_${oldMessage.guild.id}`);
 	const logschannel = oldMessage.guild.channels.cache.get(wass)
     
-	if (logschannel) logschannel.send(new Discord.MessageEmbed()
+	if (logschannel) logschannel.send(new Discord.EmbedBuilder()
 		.setColor(color)
 		.setAuthor(`Message modifié`)
 		.setDescription(`${oldMessage.author} À modifié sont message dans <#${oldMessage.channel.id}>`)

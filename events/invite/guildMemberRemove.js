@@ -1,8 +1,8 @@
 const axios = require('axios');
 const db = require("quick.db")
 const {
-	MessageEmbed
-} = require("discord.js");
+	EmbedBuilder
+} = require('../../util/compat/discord.js');
 const ms = require("ms")
 
 module.exports = async (client, member) => {
@@ -12,10 +12,10 @@ module.exports = async (client, member) => {
 
 	if (db.get(`leavemessageembed_${member.guild.id}`) !== null) {
 		let welcomeChannel = await client.channels.fetch(db.get(`leavechannelmessage_${member.guild.id}`)).catch(err => {});
-		if (member.user.bot && welcomeChannel) return welcomeChannel.send(new MessageEmbed().setColor(color).setDescription(`Le bot ${member.toString()} nous a quitter, il avait rejoins en utilisant ***l'api OAuth2***`)).catch(err => {});
+		if (member.user.bot && welcomeChannel) return welcomeChannel.send(new EmbedBuilder().setColor(color).setDescription(`Le bot ${member.toString()} nous a quitter, il avait rejoins en utilisant ***l'api OAuth2***`)).catch(err => {});
 		let user = db.get(`inviter_${member.guild.id}_${member.id}`);
-		if (user === null && welcomeChannel) return welcomeChannel.send(new MessageEmbed().setColor(color).setDescription(`**${member.user.tag}** a quitter le serveur, mais **je n'arrive pas à trouver** comment il l'avait rejoint.`));
-		if (user === 'vanity' && welcomeChannel) return welcomeChannel.send(new MessageEmbed().setColor(color).setDescription(`**${member.user.tag}** nous a quitter il avais rejoint en utilisant ***le lien d'invitation personnalisé du serveur.**`));
+		if (user === null && welcomeChannel) return welcomeChannel.send(new EmbedBuilder().setColor(color).setDescription(`**${member.user.tag}** a quitter le serveur, mais **je n'arrive pas à trouver** comment il l'avait rejoint.`));
+		if (user === 'vanity' && welcomeChannel) return welcomeChannel.send(new EmbedBuilder().setColor(color).setDescription(`**${member.user.tag}** nous a quitter il avais rejoint en utilisant ***le lien d'invitation personnalisé du serveur.**`));
 		let iv2 = await client.users.fetch(user).catch(err => {});
 		let inv = db.fetch(`invites_${member.guild.id}_${user}`);
 		if (inv == null) inv = 0

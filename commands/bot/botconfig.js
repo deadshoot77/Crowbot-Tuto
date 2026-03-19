@@ -1,11 +1,11 @@
-const Discord = require('discord.js')
+const Discord = require('../../util/compat/discord.js')
 const db = require('quick.db')
 const {
     MessageActionRow,
     MessageButton,
     MessageMenuOption,
     MessageMenu
-} = require('discord-buttons');
+} = require('../../util/compat/discord-components.js');
 
 function status(statut) {
     if (statut === "dnd") return `\`🔴\``
@@ -32,7 +32,7 @@ module.exports = {
     run: async (client, message, args, prefix, color) => {
 
         if (client.config.owner.includes(message.author.id)) {
-                const embed = new Discord.MessageEmbed()
+                const embed = new Discord.EmbedBuilder()
 
                 embed.setTitle(`Configuration Bot`)
                 embed.setFooter(`${client.config.name}`)

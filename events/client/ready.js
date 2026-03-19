@@ -1,5 +1,5 @@
-const Discord = require("discord.js");
-const disbut = require("discord-buttons")
+const Discord = require('../../util/compat/discord.js');
+const disbut = require('../../util/compat/discord-components.js')
 const db = require("quick.db")
 
 module.exports = (client) => {

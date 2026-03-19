@@ -1,4 +1,4 @@
-const Discord = require('discord.js')
+const Discord = require('../../util/compat/discord.js')
 const db = require('quick.db')
 const axios = require("axios");
 const {
@@ -6,7 +6,7 @@ const {
 	MessageButton,
 	MessageMenuOption,
 	MessageMenu
-} = require('discord-buttons');
+} = require('../../util/compat/discord-components.js');
 
 module.exports = {
 	name: 'support',
@@ -21,7 +21,7 @@ module.exports = {
 		})
 		if (client.config.owner.includes(message.author.id) || db.get(`ownermd_${client.user.id}_${message.author.id}`) === true || perm || db.get(`channelpublic_${message.guild.id}_${message.channel.id}`) === true) {
 
-            const embed = new Discord.MessageEmbed()
+            const embed = new Discord.EmbedBuilder()
             embed.setTitle(`Besoin D'aide ?`)
             embed.setURL('https://discord.gg/PuqkTuxtFA')
             embed.setColor(color)

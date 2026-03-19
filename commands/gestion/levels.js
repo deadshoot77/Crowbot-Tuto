@@ -1,11 +1,11 @@
-const Discord = require('discord.js')
+const Discord = require('../../util/compat/discord.js')
 const db = require('quick.db')
 const {
 	MessageActionRow,
 	MessageButton,
 	MessageMenuOption,
 	MessageMenu
-} = require('discord-buttons');
+} = require('../../util/compat/discord-components.js');
 
 module.exports = {
 	name: 'levels',
@@ -13,7 +13,7 @@ module.exports = {
 	run: async (client, message, args, prefix, color) => {
 		function updateembed(msg) {
 			if (db.get(`levelstyle_${message.guild.id}_${message.id}`) === "message" || db.get(`levelstyle_${message.guild.id}_${message.id}`) === null) {
-				const embed = new Discord.MessageEmbed()
+				const embed = new Discord.EmbedBuilder()
 					.setTitle(`Configuration Level`)
 					.setColor(color)
 					.setFooter(`${client.config.name}`)
@@ -87,7 +87,7 @@ module.exports = {
 				})
 			} else if (db.get(`levelstyle_${message.guild.id}_${message.id}`) === "embed") {
 
-				const embed = new Discord.MessageEmbed()
+				const embed = new Discord.EmbedBuilder()
 					.setTitle(`Configuration Level`)
 					.setColor(color)
 					.setFooter(`${client.config.name}`)
@@ -179,7 +179,7 @@ module.exports = {
 				setTimeout(() => {
 					m.edit("", {
 						components: [],
-						embed: new Discord.MessageEmbed()
+						embed: new Discord.EmbedBuilder()
 							.setFooter(`${client.config.name}`)
 							.setColor(color)
 							.setTimestamp()
@@ -387,7 +387,7 @@ Quel est **le nouveau message de level** ?`).then(mp => {
 
 
 			]
-			const embedbase = new Discord.MessageEmbed()
+			const embedbase = new Discord.EmbedBuilder()
 				.setDescription("** **")
 			let interactiveButtons = new MessageMenu()
 				.setID(message.id + 'MenuSelection')
@@ -527,7 +527,7 @@ Serveur : {guild:name}
 							break
 
 						case "Modifier l'auteur":
-							const embedquest = new Discord.MessageEmbed()
+							const embedquest = new Discord.EmbedBuilder()
 
 							let SELAMq = await message.channel.send("Quel est **le nouveau autheur de l'embed ?", embedquest.setDescription("Vous pouvez mentionner un **Utilisateur** pour mettre son pseudo et sont Avatar"))
 
@@ -589,7 +589,7 @@ Serveur : {guild:name}
 							msgg.edit(embedbase)
 							break
 						case "Modifier le footer":
-							const embedtttt = new Discord.MessageEmbed()
+							const embedtttt = new Discord.EmbedBuilder()
 							let TDCQUEST2 = await message.channel.send("Quel **Footer** voulez-vous attribuez à l'embed ?", embedtttt.setDescription("Vous pouvez mentionner un **Utilisateur** pour mettre son pseudo et sont Avatar"))
 
 							message.channel.awaitMessages(filter, {
