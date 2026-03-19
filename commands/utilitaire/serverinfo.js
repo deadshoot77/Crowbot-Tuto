@@ -1,11 +1,11 @@
-const Discord = require('discord.js')
+const Discord = require('../../util/compat/discord.js')
 const db = require('quick.db')
 const {
 	MessageActionRow,
 	MessageButton,
 	MessageMenuOption,
 	MessageMenu
-} = require('discord-buttons');
+} = require('../../util/compat/discord-components.js');
 const axios = require('axios')
 
 module.exports = {
@@ -39,7 +39,7 @@ module.exports = {
 				if (m.roles.cache.size == 0) i++;
 			})
 			//console.log(NoRoles)
-			const ServerInfo = new Discord.MessageEmbed()
+			const ServerInfo = new Discord.EmbedBuilder()
 				.setTitle(`${guild.name} `)
 				.setURL("https://discord.gg/PuqkTuxtFA")
 				.addField(`Identifiant Serveur <a:4_warning:1220471714056507535> :`, `__${guild.id}__`, true)

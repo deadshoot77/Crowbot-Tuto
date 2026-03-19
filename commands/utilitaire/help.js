@@ -1,11 +1,11 @@
-const Discord = require('discord.js')
+const Discord = require('../../util/compat/discord.js')
 const db = require('quick.db')
 const {
 	MessageActionRow,
 	MessageButton,
 	MessageMenuOption,
 	MessageMenu
-} = require('discord-buttons');
+} = require('../../util/compat/discord-components.js');
 const {
 	ButtonPages
 } = require('../../util/embedButton/start.js');
@@ -16,7 +16,7 @@ module.exports = {
 	run: async (client, message, args, prefix, color) => {
 		if (args[0] === "all") {
 
-			const public = new Discord.MessageEmbed()
+			const public = new Discord.EmbedBuilder()
 				.setColor(color)
 				.setFooter(`Prefix : ${prefix} • ${client.config.name}`)
 				.setTitle("Liste des commandes par permissions")
@@ -45,7 +45,7 @@ module.exports = {
 			})
 			if (client.config.owner.includes(message.author.id) || db.get(`ownermd_${client.user.id}_${message.author.id}`) === true || perm) {
 
-				const mods = new Discord.MessageEmbed()
+				const mods = new Discord.EmbedBuilder()
 					.setColor(color)
 					.setFooter(`Prefix : ${prefix} • ${client.config.name}`)
 					.setTitle("Liste des commandes par permissions")
@@ -59,7 +59,7 @@ module.exports = {
 - \`${client.config.prefix}warn [add/remove/clear/list]\`
 `)
 
-				const admin = new Discord.MessageEmbed()
+				const admin = new Discord.EmbedBuilder()
 					.setColor(color)
 					.setFooter(`Prefix : ${prefix} • ${client.config.name}`)
 					.setTitle("Liste des commandes par permissions")
@@ -76,7 +76,7 @@ module.exports = {
 - \`${client.config.prefix}kick <membre> [raison]\`
 `)
 
-				const owner = new Discord.MessageEmbed()
+				const owner = new Discord.EmbedBuilder()
 					.setColor(color)
 					.setFooter(`Prefix : ${prefix} • ${client.config.name}`)
 					.setTitle("Liste des commandes par permissions")
@@ -90,7 +90,7 @@ module.exports = {
 - \`${client.config.prefix}clear [membre/message]\`
 `)
 
-				const owner2 = new Discord.MessageEmbed()
+				const owner2 = new Discord.EmbedBuilder()
 					.setColor(color)
 					.setFooter(`Prefix : ${prefix} • ${client.config.name}`)
 					.setTitle("Liste des commandes par permissions")
@@ -138,7 +138,7 @@ module.exports = {
 			if (db.get(`ownermd_${client.user.id}_${message.author.id}`) === true) perm = 4
 			if (client.config.owner.includes(message.author.id)) perm = 5
 
-			const util = new Discord.MessageEmbed()
+			const util = new Discord.EmbedBuilder()
 			util.setColor(color)
 			util.setFooter(`Prefix : ${prefix} • ${client.config.name}`)
 			util.setTitle("Utilitaire")
@@ -164,7 +164,7 @@ module.exports = {
 				if (1 <= perm) util.addField(`\`${prefix}voice [info all/all]\``, "Permet de voir des informations sur les les membres en vocal sur le serveur")
 
 
-			const mods = new Discord.MessageEmbed()
+			const mods = new Discord.EmbedBuilder()
 			mods.setColor(color)
 			mods.setFooter(`Prefix : ${prefix} • ${client.config.name}`)
 			mods.setTitle("Modération")
@@ -192,7 +192,7 @@ module.exports = {
 			if (1 <= perm) mods.addField(`\`${prefix}warn <add/remove/list/clear> <add/remove: membre> <remove: warnID>\``, "Permet de gérer les sanctions d'un membre")
 
 
-			const gestion = new Discord.MessageEmbed()
+			const gestion = new Discord.EmbedBuilder()
 			gestion.setColor(color)
 			gestion.setFooter(`Prefix : ${prefix} • ${client.config.name}`)
 			gestion.setTitle("Serveur Gestion")
@@ -219,7 +219,7 @@ module.exports = {
 			if (4 <= perm) gestion.addField(`\`${prefix}welcome\``, "Permet de paramétrer les actions à effectuer quand un membre rejoint le serveur")
 			if (5 <= perm) gestion.addField(`\`${prefix}theme <color>\``, "Permet de changer la couleur d'embed du bot")
 
-			const bot = new Discord.MessageEmbed()
+			const bot = new Discord.EmbedBuilder()
 			bot.setColor(color)
 			bot.setFooter(`Prefix : ${prefix} • ${client.config.name}`)
 			bot.setTitle("Bot")

@@ -1,11 +1,11 @@
-const Discord = require('discord.js')
+const Discord = require('../../util/compat/discord.js')
 const db = require('quick.db')
 const {
 	MessageActionRow,
 	MessageButton,
 	MessageMenuOption,
 	MessageMenu
-} = require('discord-buttons');
+} = require('../../util/compat/discord-components.js');
 const axios = require('axios')
 
 module.exports = {
@@ -46,7 +46,7 @@ module.exports = {
 				let url = data.banner.startsWith("a_") ? ".gif?size=2048" : ".png?size=2048";
 				url = `https://cdn.discordapp.com/banners/${user.id}/${data.banner}${url}`;
 
-				const UserInfo = new Discord.MessageEmbed()
+				const UserInfo = new Discord.EmbedBuilder()
 
 					.setTitle(user.user.tag)
 					.setDescription(`<@${user.user.id}>\nPrésent sur ce serveur depuis le <t:${parseInt(user.joinedTimestamp / 1000 )}:d>\nCompte créé le <t:${parseInt(user.user.createdTimestamp / 1000)}:d>\nServeur en commun: ${nm}`)
@@ -59,7 +59,7 @@ module.exports = {
 				message.channel.send(UserInfo)
 			} else {
 
-				const UserInfo = new Discord.MessageEmbed()
+				const UserInfo = new Discord.EmbedBuilder()
 
 					.setTitle(user.user.tag)
 					.setDescription(`<@${user.user.id}>\nPrésent sur ce serveur depuis le <t:${parseInt(user.joinedTimestamp / 1000 )}:d>\nCompte créé le <t:${parseInt(user.user.createdTimestamp / 1000)}:d>\nServeur en commun: ${nm}`)

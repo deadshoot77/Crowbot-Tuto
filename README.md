@@ -1,86 +1,60 @@
-N'hésitez pas à mettre en star ce github.
-```
-Le bot ne mute plus les personnes qui rejoigne un serveur.
-Le NSFW retiré du bot.
-etc
-Prend pas la release prend le code source
-```
-### Setup
-```
-1. Créez un bot
-･ Rendez-vous sur le site : https://discord.com/developers/applications
-･ En haut à droite, cliquez sur "Nouvelle Application".
-･ Dans l'onglet "Bot", cochez les 3 "Privileged Gateway Intents" (Presence Intent, Server Intent et Message Content Intent).
-･ Réinitialisez et copiez le token de votre bot.
-･ Allez dans l'onglet "Oauth2", puis dans "OAuth2 URL Generator", cochez "bot" et "administrator".
-･ Copiez et collez l'URL générée dans un autre onglet et invitez le bot dans votre serveur.
+# CrowBot Tuto — migration discord.js v14
+
+Cette base conserve l'esprit CrowBot : projet **JavaScript CommonJS**, **handler préfixé** (`+` par défaut), commandes FR, structure `commands/*` et `events/*`, stockage `quick.db`, et menus/boutons migrés vers les **composants natifs de Discord.js v14**.
+
+## Prérequis
+
+- **Node.js 20 LTS** ou plus récent.
+- Un bot Discord avec les intents activés dans le **Discord Developer Portal** :
+  - Server Members Intent
+  - Presence Intent
+  - Message Content Intent
+
+## Installation
+
+```bash
+npm install
+cp .env.example .env
+# éditez .env puis ajoutez votre token
+npm start
 ```
 
+## Configuration
 
-2.1 L'héberger sur son PC
-```
-Prérequis :
-Assurez-vous d'avoir Node.js 16.20.0 : https://nodejs.org/en/blog/release/v16.20.0
-Téléchargez Crowbot-Fix.zip depuis les releases (https://github.com/4wip/Crowbot-Fix/releases/)
-Extrayez le dossier sur votre PC
-Pour le token, vous serez obliger d'aller dans util/login.js et client.login("Mettre votre token ici.");
+### 1) Variables d'environnement
 
-Allez dans config.json :
-{
-    "color": "#2B2D31", //Couleur HEX
-    "prefix": "+", //Préfixe du bot, par exemple pour utiliser +help
-    "name": "CrowBot Remade", // Footer Embed
-    "defaultjoinmessage": "{user} vient de rejoindre. Il a été invité par **{inviter:name}** qui a désormais **{invite} invitations** !", // Modifiable
-    "defaultleavemessage": "{user} vient de quitter. Il avait été invité par **{inviter:name}** qui a désormais **{invite} invitations** ", // Modifiable
-    "defaultLevelmessage": "**{user}** vient de passer au niveau **{level}**. Bravo à lui !", // Modifiable
-        "owner": [  // ID des propriétaires
-        "1208337813339373569", 
-        "",
-        ""
-    ]
-}
+Le token n'est plus stocké dans le code.
 
-Lancement du bot
-Ouvrez un terminal.
-Tapez "npm i" dans le terminal.
-Ensuite, pour lancer le bot, tapez "node index.js" dans le terminal.
-Une autre option est de double-cliquer sur le fichier .bat pour lancer le bot. Ce fichier effectue la même opération que la commande précédente.
+```env
+DISCORD_TOKEN=...
+PORT=8080
 ```
 
+> Si l'ancien token du dépôt a été exposé, **régénérez-le immédiatement** dans le Discord Developer Portal avant toute mise en production.
 
-2.2 Héberger 24/7 sur Render | Gratuit (PC et Mobile)
-```
-Faites un fork du dépôt GitHub suivant pour modifier le fichier config.json : https://github.com/4wip/Crowbot-Fix/fork
-Rendez-vous sur le site Render et créez un compte.
-Créez un service web sur Render :
-Utilisez le fork que vous venez de faire.
-Paramètres :
-Région : Ohio (US East).
-Runtime : Node
-Commande de construction : "npm i"
-Commande de démarrage : "node index.js"
-Type d'instance : Gratuit ou autre.
+### 2) `config.json`
 
-Variables d'environnement :
-token : Entrez le token de votre bot.
-NODE_VERSION : 16.20.0
+Le fichier `config.json` reste utilisé pour la couleur, le préfixe, le nom d'affichage et les IDs owner.
 
-Enfin, créez votre service web.
-Votre bot va se construire. Allez dans l'onglet "logs" sur Render pour suivre le processus. Une fois que tout est chargé, vous verrez l'indication suivante : "Connecté à Nomdetonbot". Cela signifie que votre bot est en ligne.
+## Ce qui a été modernisé
 
-Pour maintenir votre bot en ligne 24/7, rendez-vous sur le site cron-job.org et créez un compte.
-Dans le tableau de bord, allez dans l'onglet "Cronjobs" et créez un nouveau Cronjob :
-Nom : Choisissez le nom que vous souhaitez.
-URL : Utilisez l'URL de votre service web sur Render (voir l'image).
-Calendrier d'exécution : Chaque minute.
-Créez le Cronjob et voilà, votre bot fonctionne maintenant 24/7.
-```
-![image](https://github.com/4wip/Crowbot-Fix/assets/168364544/9c70adb6-34f7-44fe-97ad-78b46c2795bf)
+- Migration de **discord.js 12 → 14**.
+- Remplacement de **discord-buttons** par les **composants natifs** (`ButtonBuilder`, `ActionRowBuilder`, `StringSelectMenuBuilder`) via une couche de compatibilité pour limiter la réécriture.
+- Token déplacé vers `process.env.DISCORD_TOKEN` avec `dotenv`.
+- Bootstrap revu : intents/partials v14, chargement résilient des commandes/events, logs de démarrage et gestion d'erreurs améliorée.
+- `keep_alive.js` converti en module réutilisable, cohérent pour Render.
 
-```
-Si vous avez une question ou besoin d'aide : discord.gg/A5bfyv3AzB
-```
-### Crédit
-```
-https://github.com/whoisbaby/CrowBot-Remade
-```
+## Démarrage Render
+
+- Build command : `npm install`
+- Start command : `npm start`
+- Environment :
+  - `DISCORD_TOKEN`
+  - `PORT`
+  - `NODE_VERSION=20`
+
+## Notes
+
+- Le bot **garde les commandes préfixées**.
+- Plusieurs assistants interactifs historiques reposaient sur `discord-buttons` : ils passent maintenant par `interactionCreate` avec une **passerelle de compatibilité** pour préserver au maximum le comportement existant.
+- Consultez `MIGRATION_NOTES.md` pour les détails des remplacements, limites connues et points à surveiller.

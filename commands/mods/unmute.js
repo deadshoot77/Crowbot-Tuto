@@ -1,11 +1,11 @@
-const Discord = require('discord.js')
+const Discord = require('../../util/compat/discord.js')
 const db = require('quick.db')
 const {
     MessageActionRow,
     MessageButton,
     MessageMenuOption,
     MessageMenu
-} = require('discord-buttons');
+} = require('../../util/compat/discord-components.js');
 
 function unban(message, user, authorcooldown) {
     message.guild.members.unban(user.id, {
@@ -73,7 +73,7 @@ module.exports = {
                 user.send(`Vous avez été **unmute** sur **${message.guild.name}**`);
 
 
-                logschannel.send(new Discord.MessageEmbed()
+                logschannel.send(new Discord.EmbedBuilder()
                     .setColor(color)
 
                     .setDescription(`${message.author} a **unmute** ${user}`)

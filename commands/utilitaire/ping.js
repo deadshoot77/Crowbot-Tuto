@@ -1,14 +1,14 @@
-const Discord = require('discord.js')
+const Discord = require('../../util/compat/discord.js')
 const {
-	MessageEmbed
-} = require('discord.js')
+	EmbedBuilder
+} = require('../../util/compat/discord.js')
 const db = require('quick.db')
 const {
 	MessageActionRow,
 	MessageButton,
 	MessageMenuOption,
 	MessageMenu
-} = require('discord-buttons');
+} = require('../../util/compat/discord-components.js');
 
 function sleep(ms) {
 	return new Promise((resolve) => {
@@ -29,7 +29,7 @@ module.exports = {
 		})
 		if (client.config.owner.includes(message.author.id) || db.get(`ownermd_${client.user.id}_${message.author.id}`) === true || perm || db.get(`channelpublic_${message.guild.id}_${message.channel.id}`) === true) {
 			
-			let embeed = new Discord.MessageEmbed()
+			let embeed = new Discord.EmbedBuilder()
 			embeed.setTitle("Calcul De La Latence Du Bot Et De L'API De Discord...")
 			embeed.addField("Ping", `Calcul en cours`, true)
 			embeed.addField("Latence", `${client.ws.ping}ms`, true)
@@ -38,7 +38,7 @@ module.exports = {
 			embeed.setFooter(`${client.config.name}`)
 
 			let msg = await message.channel.send(embeed)
-			let embed = new Discord.MessageEmbed()
+			let embed = new Discord.EmbedBuilder()
 			embed.setTitle("Voici La Latence Du Bot Et De L'API De Discord")
 			embed.addField("Ping", `${msg.createdAt - message.createdAt + "ms"}`, true)
 			embed.addField("Latence", `${client.ws.ping}ms`, true)

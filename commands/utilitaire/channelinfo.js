@@ -1,11 +1,11 @@
-const Discord = require('discord.js')
+const Discord = require('../../util/compat/discord.js')
 const db = require('quick.db')
 const {
 	MessageActionRow,
 	MessageButton,
 	MessageMenuOption,
 	MessageMenu
-} = require('discord-buttons');
+} = require('../../util/compat/discord-components.js');
 const axios = require('axios')
 
 module.exports = {
@@ -34,7 +34,7 @@ module.exports = {
 
 			if (channel.type === 'text' || channel.type === 'news' || channel.type === 'store') {
 
-				const ChannelInfo = new Discord.MessageEmbed()
+				const ChannelInfo = new Discord.EmbedBuilder()
 
 					.setTitle(`Voici Les Informations Du Channel : ${channel.name}`)
 					.addField(`Nom`, `${channel.name}`, true)
@@ -54,7 +54,7 @@ module.exports = {
 			if (channel.type === 'category') {
 
 
-				const CategoryInfo = new Discord.MessageEmbed()
+				const CategoryInfo = new Discord.EmbedBuilder()
 
 					.setTitle(`Voici Les Informations De La Catégorie : ${channel.name}`)
 					.addField(`Nom`, `${channel.name}`, true)
@@ -72,7 +72,7 @@ module.exports = {
 
 			if (channel.type === 'voice') {
 
-				const VoiceInfo = new Discord.MessageEmbed()
+				const VoiceInfo = new Discord.EmbedBuilder()
 
 					.setTitle(`Voici Les Informations Du Vocal : ${channel.name}`)
 					.addField(`Nom`, `${channel.name}`, true)

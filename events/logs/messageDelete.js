@@ -1,6 +1,6 @@
 const axios = require('axios');
 const db = require("quick.db")
-const Discord = require("discord.js");
+const Discord = require('../../util/compat/discord.js');
 const ms = require("ms")
 
 module.exports = (client, message) => {
@@ -10,7 +10,7 @@ module.exports = (client, message) => {
 	let wass = db.get(`msglog_${message.guild.id}`);
 	const logschannel = message.guild.channels.cache.get(wass)
 
-	if (logschannel) logschannel.send(new Discord.MessageEmbed()
+	if (logschannel) logschannel.send(new Discord.EmbedBuilder()
         .setColor(color)
 		.setAuthor(`Message supprimé`)
 		.setDescription(`dans <#${message.channel.id}> par ${message.author}`)

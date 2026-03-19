@@ -1,7 +1,7 @@
 const {
 	MessageActionRow,
 	MessageButton
-} = require('discord-buttons');
+} = require('./compat/discord-components.js');
 const db = require("quick.db");
 
 const buttonInteraction = async function(button, interaction) {

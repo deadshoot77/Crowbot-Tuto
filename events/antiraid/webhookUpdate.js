@@ -1,8 +1,8 @@
 const axios = require('axios');
 const db = require("quick.db")
 const {
-	MessageEmbed
-} = require("discord.js");
+	EmbedBuilder
+} = require('../../util/compat/discord.js');
 const ms = require("ms")
 const request = require("request")
 module.exports = async (client, channelUpdated) => {

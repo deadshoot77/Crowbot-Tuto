@@ -1,11 +1,11 @@
-const Discord = require('discord.js')
+const Discord = require('../../util/compat/discord.js')
 const db = require('quick.db')
 const {
 	MessageActionRow,
 	MessageButton,
 	MessageMenuOption,
 	MessageMenu
-} = require('discord-buttons');
+} = require('../../util/compat/discord-components.js');
 const axios = require('axios')
 
 module.exports = {
@@ -64,7 +64,7 @@ module.exports = {
 
 			const role = message.mentions.roles.first() || message.guild.roles.cache.get(args[0]);
 
-			let roleEmbed = new Discord.MessageEmbed()
+			let roleEmbed = new Discord.EmbedBuilder()
 				.setColor(color)
 				.setTitle(role.name)
 				.addField("Nom ", `<@&${role.id}>`)

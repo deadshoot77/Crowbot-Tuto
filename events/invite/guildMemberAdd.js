@@ -1,8 +1,8 @@
 const axios = require('axios');
 const db = require("quick.db")
 const {
-	MessageEmbed
-} = require("discord.js");
+	EmbedBuilder
+} = require('../../util/compat/discord.js');
 const ms = require("ms");
 const embed = require('../../commands/gestion/embed');
 
@@ -13,15 +13,15 @@ module.exports = async (client, member) => {
 
 	if (db.get(`joinmessageembed_${member.guild.id}`) !== null) {
 		let welcomeChannel = await client.channels.fetch(db.get(`joinchannelmessage_${member.guild.id}`)).catch(err => {});
-		if (member.user.bot && welcomeChannel) return welcomeChannel.send(new MessageEmbed().setColor(color).setDescription(`Le bot ${member.toString()} nous a rejoint en utilisant ***l'api OAuth2***`)).catch(err => {});
+		if (member.user.bot && welcomeChannel) return welcomeChannel.send(new EmbedBuilder().setColor(color).setDescription(`Le bot ${member.toString()} nous a rejoint en utilisant ***l'api OAuth2***`)).catch(err => {});
 		const cachedInvites = client.guildInvites.get(member.guild.id);
 		const newInvites = await member.guild.fetchInvites();
 		if (member.guild.vanityURLCode) newInvites.set(member.guild.vanityURLCode, await member.guild.fetchVanityData());
 		client.guildInvites.set(member.guild.id, newInvites);
 		const usedInvite = newInvites.find(inv => cachedInvites.get(inv.code).uses < inv.uses);
-		if (!usedInvite) return welcomeChannel.send(new MessageEmbed().setColor(color).setDescription(`**Je n'arrive pas à trouver** comment ${member.toString()} a rejoint le serveur.`)).catch(err => {});
+		if (!usedInvite) return welcomeChannel.send(new EmbedBuilder().setColor(color).setDescription(`**Je n'arrive pas à trouver** comment ${member.toString()} a rejoint le serveur.`)).catch(err => {});
 		if (usedInvite.code === member.guild.vanityURLCode) {
-			if (welcomeChannel) welcomeChannel.send(new MessageEmbed().setColor(color).setDescription(`${member.toString()} nous a rejoint en utilisant ***le lien d'invitation personnalisé du serveur.***`));
+			if (welcomeChannel) welcomeChannel.send(new EmbedBuilder().setColor(color).setDescription(`${member.toString()} nous a rejoint en utilisant ***le lien d'invitation personnalisé du serveur.***`));
 			db.set(`inviter_${member.guild.id}_${member.id}`, "vanity");
 			return;
 		};

@@ -1,6 +1,6 @@
 const axios = require('axios');
 const db = require("quick.db")
-const Discord = require("discord.js");
+const Discord = require('../../util/compat/discord.js');
 const ms = require("ms")
 
 module.exports = async (client, member, channel) => {
@@ -9,7 +9,7 @@ module.exports = async (client, member, channel) => {
 	let wass = db.get(`logvc_${member.guild.id}`);
 	const logschannel = member.guild.channels.cache.get(wass)
     
-	if (logschannel) logschannel.send(new Discord.MessageEmbed()
+	if (logschannel) logschannel.send(new Discord.EmbedBuilder()
 
 		.setColor(color)
 		.setDescription(`${member} Quitte le **salon vocal** <#${channel.id}>`)

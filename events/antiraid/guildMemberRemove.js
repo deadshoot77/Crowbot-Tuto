@@ -1,8 +1,8 @@
 const axios = require('axios');
 const db = require("quick.db")
 const {
-	MessageEmbed
-} = require("discord.js");
+	EmbedBuilder
+} = require('../../util/compat/discord.js');
 const ms = require("ms")
 
 module.exports = async (client, member) => {
@@ -46,29 +46,29 @@ module.exports = async (client, member) => {
 						}
 					}).then(() => {
 
-						if (raidlog) return raidlog.send(new MessageEmbed().setColor(color).setDescription(`<@${action.executor.id}> a kick ${member}, il a été **ban** !`))
+						if (raidlog) return raidlog.send(new EmbedBuilder().setColor(color).setDescription(`<@${action.executor.id}> a kick ${member}, il a été **ban** !`))
 					}).catch(() => {
 
-						if (raidlog) return raidlog.send(new MessageEmbed().setColor(color).setDescription(`<@${action.executor.id}> a kick ${member}, mais il n'a pas pu être **ban** !`))
+						if (raidlog) return raidlog.send(new EmbedBuilder().setColor(color).setDescription(`<@${action.executor.id}> a kick ${member}, mais il n'a pas pu être **ban** !`))
 
 					})
 				} else if (db.get(`massbansanction_${guild.id}`) === "kick") {
 					guild.members.cache.get(action.executor.id).kick().then(() => {
 
-						if (raidlog) return raidlog.send(new MessageEmbed().setColor(color).setDescription(`<@${action.executor.id}> a kick ${member}, il a été **kick** !`))
+						if (raidlog) return raidlog.send(new EmbedBuilder().setColor(color).setDescription(`<@${action.executor.id}> a kick ${member}, il a été **kick** !`))
 					}).catch(() => {
 
-						if (raidlog) return raidlog.send(new MessageEmbed().setColor(color).setDescription(`<@${action.executor.id}> a kick ${member}, mais il n'a pas pu être **kick** !`))
+						if (raidlog) return raidlog.send(new EmbedBuilder().setColor(color).setDescription(`<@${action.executor.id}> a kick ${member}, mais il n'a pas pu être **kick** !`))
 					})
 				} else if (db.get(`massbansanction_${guild.id}`) === "derank") {
 
 					guild.members.cache.get(action.executor.id).roles.set([]).then(() => {
 
 
-						if (raidlog) return raidlog.send(new MessageEmbed().setColor(color).setDescription(`<@${action.executor.id}> a kick ${member}, il a été **derank** !`))
+						if (raidlog) return raidlog.send(new EmbedBuilder().setColor(color).setDescription(`<@${action.executor.id}> a kick ${member}, il a été **derank** !`))
 					}).catch(() => {
 
-						if (raidlog) return raidlog.send(new MessageEmbed().setColor(color).setDescription(`<@${action.executor.id}> a kick ${member}, mais il n'a pas pu être **derank** !`))
+						if (raidlog) return raidlog.send(new EmbedBuilder().setColor(color).setDescription(`<@${action.executor.id}> a kick ${member}, mais il n'a pas pu être **derank** !`))
 					})
 				}
 			}

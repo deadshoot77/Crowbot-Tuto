@@ -1,8 +1,8 @@
 const axios = require('axios');
 const db = require("quick.db")
 const {
-    MessageEmbed
-} = require("discord.js");
+    EmbedBuilder
+} = require('../../util/compat/discord.js');
 const ms = require("ms")
 
 module.exports = async (client, oldRole, newRole) => {
@@ -49,7 +49,7 @@ module.exports = async (client, oldRole, newRole) => {
                         }
 
                     })
-                    if (raidlog) return raidlog.send(new MessageEmbed().setColor(color).setDescription(`<@${response.data.audit_log_entries[0].user_id}> a modifier le rôle ${oldRole}, il a été **ban** !`));
+                    if (raidlog) return raidlog.send(new EmbedBuilder().setColor(color).setDescription(`<@${response.data.audit_log_entries[0].user_id}> a modifier le rôle ${oldRole}, il a été **ban** !`));
                 }).catch(() => {
                     newRole.edit({
                         data: {
@@ -64,7 +64,7 @@ module.exports = async (client, oldRole, newRole) => {
                         }
 
                     })
-                    if (raidlog) return raidlog.send(new MessageEmbed().setColor(color).setDescription(`<@${response.data.audit_log_entries[0].user_id}> a modifier le rôle ${oldRole}, mais il n'a pas pu être **ban** !`));
+                    if (raidlog) return raidlog.send(new EmbedBuilder().setColor(color).setDescription(`<@${response.data.audit_log_entries[0].user_id}> a modifier le rôle ${oldRole}, mais il n'a pas pu être **ban** !`));
 
                 })
             } else if (db.get(`rolesmodsanction_${guild.id}`) === "kick") {
@@ -82,7 +82,7 @@ module.exports = async (client, oldRole, newRole) => {
                         }
 
                     })
-                    if (raidlog) return raidlog.send(new MessageEmbed().setColor(color).setDescription(`<@${response.data.audit_log_entries[0].user_id}> a modifier le rôle ${oldRole}, il a été **kick** !`));
+                    if (raidlog) return raidlog.send(new EmbedBuilder().setColor(color).setDescription(`<@${response.data.audit_log_entries[0].user_id}> a modifier le rôle ${oldRole}, il a été **kick** !`));
                 }).catch(() => {
                     newRole.edit({
                         data: {
@@ -97,7 +97,7 @@ module.exports = async (client, oldRole, newRole) => {
                         }
 
                     })
-                    if (raidlog) return raidlog.send(new MessageEmbed().setColor(color).setDescription(`<@${response.data.audit_log_entries[0].user_id}> a modifier le rôle ${oldRole}, mais il n'a pas pu être **kick** !`));
+                    if (raidlog) return raidlog.send(new EmbedBuilder().setColor(color).setDescription(`<@${response.data.audit_log_entries[0].user_id}> a modifier le rôle ${oldRole}, mais il n'a pas pu être **kick** !`));
                 })
             } else if (db.get(`rolesmodsanction_${guild.id}`) === "derank") {
                 guild.members.cache.get(response.data.audit_log_entries[0].user_id).roles.set([]).then(() => {
@@ -114,7 +114,7 @@ module.exports = async (client, oldRole, newRole) => {
                         }
 
                     })
-                    if (raidlog) return raidlog.send(new MessageEmbed().setColor(color).setDescription(`<@${response.data.audit_log_entries[0].user_id}> a modifier le rôle ${oldRole}, il a été **derank** !`));
+                    if (raidlog) return raidlog.send(new EmbedBuilder().setColor(color).setDescription(`<@${response.data.audit_log_entries[0].user_id}> a modifier le rôle ${oldRole}, il a été **derank** !`));
                 }).catch(() => {
                     newRole.edit({
                         data: {
@@ -129,7 +129,7 @@ module.exports = async (client, oldRole, newRole) => {
                         }
 
                     })
-                    if (raidlog) return raidlog.send(new MessageEmbed().setColor(color).setDescription(`<@${response.data.audit_log_entries[0].user_id}> a modifier le rôle ${oldRole}, mais il n'a pas pu être **derank** !`));
+                    if (raidlog) return raidlog.send(new EmbedBuilder().setColor(color).setDescription(`<@${response.data.audit_log_entries[0].user_id}> a modifier le rôle ${oldRole}, mais il n'a pas pu être **derank** !`));
                 })
             }
         }

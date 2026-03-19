@@ -1,11 +1,11 @@
-const Discord = require('discord.js')
+const Discord = require('../../util/compat/discord.js')
 const db = require('quick.db')
 const {
 	MessageActionRow,
 	MessageButton,
 	MessageMenuOption,
 	MessageMenu
-} = require('discord-buttons');
+} = require('../../util/compat/discord-components.js');
 const ms = require("ms")
 
 function duration(mss) {
@@ -108,7 +108,7 @@ module.exports = {
 					let bkp = db.get(`backupemoji_${client.user.id}`)
 					if (bkp === null) return message.channel.send("Aucune backup d'émoji trouvé sur le serveur.")
 
-					let embed = new Discord.MessageEmbed()
+					let embed = new Discord.EmbedBuilder()
 
 					embed.setTitle(`Liste des backups d'émoji`)
 						.setColor(color)
@@ -138,7 +138,7 @@ module.exports = {
 							setTimeout(() => {
 								tdata.edit("", {
 									components: [],
-									embed: new Discord.MessageEmbed()
+									embed: new Discord.EmbedBuilder()
 										.setTitle('Backup emoji')
 										.setDescription(bkp
 											.map(r => r)

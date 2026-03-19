@@ -1,7 +1,7 @@
-const Discord = require("discord.js"),
+const Discord = require('../../util/compat/discord.js'),
 	{
-		MessageEmbed
-	} = require("discord.js"),
+		EmbedBuilder
+	} = require('../../util/compat/discord.js'),
 
 	ms = require("ms"),
 	cooldown = {}
@@ -67,7 +67,7 @@ module.exports = {
 						user.send(`Vous avez été **kick** de **${message.guild.name}** pour \`${reason}\``)
 
 						if (logsmod) logsmod.send(
-							new Discord.MessageEmbed()
+							new Discord.EmbedBuilder()
 							// .setAuthor(message.author.tag, message.author.displayAvatarURL({dynamic: true}))
 							.setColor(color)
 							//.setTitle(`<:protection:847072581382438953> Modération • Type: **\`kicknissement\`**`)
@@ -84,7 +84,7 @@ module.exports = {
 						user.send(`Vous avez été **kick** de **${message.guild.name}**`)
 
 						if (logsmod) logsmod.send(
-							new Discord.MessageEmbed()
+							new Discord.EmbedBuilder()
 							//       .setAuthor(message.author.tag, message.author.displayAvatarURL({dynamic: true}))
 							.setColor(color)
 							//   .setTitle(`<:protection:847072581382438953> Modération • Type: **\`kicknissement\`**`)
@@ -102,7 +102,7 @@ module.exports = {
 					user.send(`Vous avez été **kick** de **${message.guild.name}**`)
 
 					if (logsmod) logsmod.send(
-						new Discord.MessageEmbed()
+						new Discord.EmbedBuilder()
 						//       .setAuthor(message.author.tag, message.author.displayAvatarURL({dynamic: true}))
 						.setColor(color)
 						//   .setTitle(`<:protection:847072581382438953> Modération • Type: **\`kicknissement\`**`)
@@ -121,7 +121,7 @@ module.exports = {
 				user.send(`Vous avez été **kick** de **${message.guild.name}**`)
 
 				if (logsmod) logsmod.send(
-					new Discord.MessageEmbed()
+					new Discord.EmbedBuilder()
 					//        .setAuthor(message.author.tag, message.author.displayAvatarURL({dynamic: true}))
 					.setColor(color)
 					//      .setTitle(`<:protection:847072581382438953> Modération • Type: **\`kicknissement\`**`)

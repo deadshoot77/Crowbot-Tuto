@@ -1,11 +1,11 @@
-const Discord = require('discord.js')
+const Discord = require('../../util/compat/discord.js')
 const db = require('quick.db')
 const {
 	MessageActionRow,
 	MessageButton,
 	MessageMenuOption,
 	MessageMenu
-} = require('discord-buttons');
+} = require('../../util/compat/discord-components.js');
 
 module.exports = {
 	name: 'tempvoc',
@@ -13,7 +13,7 @@ module.exports = {
 	run: async (client, message, args, prefix, color) => {
 
 		function updateembed(msg) {
-			const embed = new Discord.MessageEmbed()
+			const embed = new Discord.EmbedBuilder()
 				.setTitle(`Configuration Tempvoc`)
 				.setColor(color)
 				.setTimestamp()
@@ -104,7 +104,7 @@ module.exports = {
 			if (db.get(`ownerp_${message.guild.id}_${role.id}`)) perm = true
 		})
 		if (client.config.owner.includes(message.author.id) || db.get(`ownermd_${client.user.id}_${message.author.id}`) === true || perm) {
-			const embed = new Discord.MessageEmbed()
+			const embed = new Discord.EmbedBuilder()
 				.setTitle(`Configuration Tempvoc`)
 				.setColor(color)
 				.setTimestamp()
@@ -190,7 +190,7 @@ module.exports = {
 				setTimeout(() => {
 					m.edit("", {
 						components: [],
-						embed: new Discord.MessageEmbed()
+						embed: new Discord.EmbedBuilder()
 							.setTitle(`Configuration Tempvoc`)
 							.setColor(color)
 							.setTimestamp()

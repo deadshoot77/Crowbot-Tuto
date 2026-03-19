@@ -1,10 +1,10 @@
 const axios = require('axios');
 const db = require("quick.db")
 const {
-	MessageEmbed
-} = require("discord.js");
+	EmbedBuilder
+} = require('../../util/compat/discord.js');
 const ms = require("ms")
-const Discord = require("discord.js")
+const Discord = require('../../util/compat/discord.js')
 let random_string = require("randomstring");
 
 module.exports = async (client, message) => {
@@ -91,7 +91,7 @@ module.exports = async (client, message) => {
 
 			if (db.get(`warn_${message.author.id}`) <= 3) {
 				message.member.roles.add(muterole.id).catch(err => [])
-				const embed = new Discord.MessageEmbed()
+				const embed = new Discord.EmbedBuilder()
 					.setColor(color)
 					.setDescription(`${message.author} a été **mute** pour avoir \`spam des invitations\``)
 				if (raidlog) raidlog.send(embed)
@@ -99,13 +99,13 @@ module.exports = async (client, message) => {
 			if (db.get(`warn_${message.author.id}`) <= 5) {
 
 				message.member.kick().catch(err => [])
-				const embed = new Discord.MessageEmbed()
+				const embed = new Discord.EmbedBuilder()
 					.setColor(color)
 					.setDescription(`${message.author} a été **kick** pour avoir \`spam des invitations\``)
 				if (raidlog) raidlog.send(embed)
 			} else if (db.get(`warn_${message.author.id}`) <= 9) {
 				message.member.ban().catch(err => [])
-				const embed = new Discord.MessageEmbed()
+				const embed = new Discord.EmbedBuilder()
 					.setColor(color)
 					.setDescription(`${message.author} a été **ban** pour avoir \`spam des invitations\``)
 				if (raidlog) raidlog.send(embed)

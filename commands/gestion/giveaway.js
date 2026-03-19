@@ -1,11 +1,11 @@
-const Discord = require('discord.js')
+const Discord = require('../../util/compat/discord.js')
 const db = require('quick.db')
 const {
 	MessageActionRow,
 	MessageButton,
 	MessageMenuOption,
 	MessageMenu
-} = require('discord-buttons');
+} = require('../../util/compat/discord-components.js');
 const ms = require("ms")
 
 module.exports = {
@@ -67,7 +67,7 @@ module.exports = {
 
 			} else if (!args[0]) {
 				function updateembed(msg) {
-					const embed = new Discord.MessageEmbed()
+					const embed = new Discord.EmbedBuilder()
 						.setTitle(`Configuration Giveaway`)
 						.setColor(color)
 						.addField(`Durée`, `${db.get(`dure${msg.guild.id}`) === null?   "Non définit": `${ms(db.get(`dure${msg.guild.id}`)).replace("d","j")}`}`, true)
@@ -178,7 +178,7 @@ module.exports = {
 				}
 
 
-				const embed = new Discord.MessageEmbed()
+				const embed = new Discord.EmbedBuilder()
 					.setTitle(`Configuration Giveaway`)
 					.setColor(color)
 					.addField(`Durée`, `${db.get(`dure${message.guild.id}`) === null?   "Non définit": `${ms(db.get(`dure${message.guild.id}`)).replace("d","j") }`}`, true)
@@ -291,7 +291,7 @@ module.exports = {
 					setTimeout(() => {
 						m.edit("", {
 							components: [],
-							embed: new Discord.MessageEmbed()
+							embed: new Discord.EmbedBuilder()
 								.setTitle(`Configuration Giveaway`)
 								.setColor(color)
 								.addField(`Durée`, `${db.get(`dure${message.guild.id}`) === null?   "Non définit": `${ms(db.get(`dure${message.guild.id}`)).replace("d","j") }`}`, true)
@@ -324,7 +324,7 @@ module.exports = {
 
 							var timestamp = Date.now() + db.get(`dure${message.guild.id}`)
 
-							var embed = new Discord.MessageEmbed()
+							var embed = new Discord.EmbedBuilder()
 								.setTitle(db.get(`gain${message.guild.id}`))
 								.setDescription(`Réagissez avec ${db.get(`reactgv${message.guild.id}`) === null?   ":tada:":`${db.get(`reactgv${message.guild.id}`)}`} pour participer!\n*Nombre de gagnants : ${db.get(`winnergv${message.guild.id}`) === null?   1:`${db.get(`winnergv${message.guild.id}`)}`}*`)
 								.addField(`Temps restant`, `${duration(db.get(`dure${message.guild.id}`))}`)
@@ -346,7 +346,7 @@ module.exports = {
 							setInterval(async () => {
 								let ttm = duration(timestamp - Date.now())
 								if (!ttm.includes("-")) {
-									var slm = new Discord.MessageEmbed()
+									var slm = new Discord.EmbedBuilder()
 										.setTitle(db.get(`gain${message.guild.id}`))
 										.setDescription(`Réagissez avec ${db.get(`reactgv${message.guild.id}`) === null ? "🎉": db.get(`reactgv${message.guild.id}`) } pour participer!\n*Nombre de gagnants : ${db.get(`winnergv${message.guild.id}`) === null?   1:`${db.get(`winnergv${message.guild.id}`)}`}*`)
 										.addField(`Temps restant`, `${ttm}`)
@@ -372,7 +372,7 @@ module.exports = {
 									winner = msg.reactions.cache.get(`${db.get(`reactgv${message.guild.id}`) === null ? "🎉": db.get(`2reactgv${message.guild.id}`) === null ?  db.get(`reactgv${message.guild.id}`):db.get(`2reactgv${message.guild.id}`) }`).users.cache.filter((u) => !u.bot).random(Math.min(db.get(`winnergv${message.guild.id}`) === null ? 1 : `${db.get(`winnergv${message.guild.id}`)}`, msg.reactions.cache.get(`${db.get(`reactgv${message.guild.id}`) === null ? "🎉": db.get(`2reactgv${message.guild.id}`) === null ?  db.get(`reactgv${message.guild.id}`):db.get(`2reactgv${message.guild.id}`) }`).count));
 								}
 								if (!winner) return message.channel.send(`Aucun participant valide`)
-								var embed = new Discord.MessageEmbed()
+								var embed = new Discord.EmbedBuilder()
 									.setTitle(db.get(`gain${message.guild.id}`))
 									.setDescription(`
 Gagnant: ${winner}

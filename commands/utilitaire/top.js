@@ -1,11 +1,11 @@
-const Discord = require('discord.js')
+const Discord = require('../../util/compat/discord.js')
 const db = require('quick.db')
 const {
 	MessageActionRow,
 	MessageButton,
 	MessageMenuOption,
 	MessageMenu
-} = require('discord-buttons');
+} = require('../../util/compat/discord-components.js');
 
 module.exports = {
 	name: 'top',
@@ -26,7 +26,7 @@ module.exports = {
 				let p1 = 5;
 				let page = 1;
 
-				const embed = new Discord.MessageEmbed()
+				const embed = new Discord.EmbedBuilder()
 
 					.setTitle('Classement Rank')
 					.setDescription(money.filter(x => message.guild.members.cache.get(x.ID.split('_')[3])).map((m, i) => `${i + 1}) **${client.users.cache.get(m.ID.split('_')[3]).tag}** : Niveau **${db.get(`guild_${message.guild.id}_level_${m.ID.split('_')[3]}`) || 0}** (*XP total : ${m.data || 0}*)`).slice(0, 5))
@@ -57,7 +57,7 @@ module.exports = {
 						setTimeout(() => {
 							tdata.edit("", {
 								components: [],
-								embed: new Discord.MessageEmbed()
+								embed: new Discord.EmbedBuilder()
 
 									.setTitle('Classement Rank')
 									.setDescription(money.filter(x => message.guild.members.cache.get(x.ID.split('_')[3])).map((m, i) => `${i + 1}) **${client.users.cache.get(m.ID.split('_')[3]).tag}** : Niveau **${db.get(`guild_${message.guild.id}_level_${m.ID.split('_')[3]}`) || 0}** (*XP total : ${m.data || 0}*)`).slice(0, 5))

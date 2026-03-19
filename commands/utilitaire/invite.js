@@ -1,11 +1,11 @@
-const Discord = require('discord.js')
+const Discord = require('../../util/compat/discord.js')
 const db = require('quick.db')
 const {
 	MessageActionRow,
 	MessageButton,
 	MessageMenuOption,
 	MessageMenu
-} = require('discord-buttons');
+} = require('../../util/compat/discord-components.js');
 
 module.exports = {
 	name: 'invites',
@@ -24,7 +24,7 @@ module.exports = {
 			let inv = db.fetch(`invites_${message.guild.id}_${member.id}`);
 			let leaves = db.fetch(`leaves_${message.guild.id}_${member.id}`);
 			let Regular = db.fetch(`Regular_${message.guild.id}_${member.id}`);
-			const embed = new Discord.MessageEmbed()
+			const embed = new Discord.EmbedBuilder()
 			embed.setAuthor('Invitations')
 			embed.setColor(color)
 			embed.setDescription(`<@${member.id}>, Possède Actuellement **${inv || 0}** ${inv || 0 > 1 ? "Invite(s)" : "Invite(s)"}\n(**${Regular || 0}** Join(s), **${leaves || 0}** Leave(s)`)

@@ -1,4 +1,4 @@
-const Discord = require("discord.js"),
+const Discord = require('../../util/compat/discord.js'),
     ms = require("ms"),
     cooldown = {}
 const db = require("quick.db")
@@ -93,7 +93,7 @@ module.exports = {
                             user.send(`Vous avez été **mute ${args[1]}** de ${message.guild.name} pour \`${reason}\``)
                             mutetime(user, time, authorcooldown, muterole)
                             if (logsmod) logsmod.send(
-                                new Discord.MessageEmbed()
+                                new Discord.EmbedBuilder()
                                 .setColor(color)
                                 .setDescription(`${message.author} a **mute ${args[1]}** ${user} pour \`${reason}\``)
 
@@ -104,7 +104,7 @@ module.exports = {
                             user.send(`Vous avez été **mute ${args[1]}** de ${message.guild.name}`)
                             mutetime(user, time, authorcooldown, muterole)
                             if (logsmod) logsmod.send(
-                                new Discord.MessageEmbed()
+                                new Discord.EmbedBuilder()
                                 .setColor(color)
                                 .setDescription(`${message.author} a **mute ${args[1]}** ${user}`)
 
@@ -121,7 +121,7 @@ module.exports = {
                             user.send(`Vous avez été **mute** de ${message.guild.name} pour \`${reason}\``)
                             mute(user, authorcooldown, muterole)
                             if (logsmod) logsmod.send(
-                                new Discord.MessageEmbed()
+                                new Discord.EmbedBuilder()
                                 .setColor(color)
                                 .setDescription(`${message.author} a **mute** ${user} pour \`${reason}\``)
 
@@ -133,7 +133,7 @@ module.exports = {
 
                             mute(user, authorcooldown, muterole)
                             if (logsmod) logsmod.send(
-                                new Discord.MessageEmbed()
+                                new Discord.EmbedBuilder()
                                 .setColor(color)
                                 .setDescription(`${message.author} a **mute** ${user}`)
 
@@ -146,7 +146,7 @@ module.exports = {
                     user.send(`Vous avez été **mute** de ${message.guild.name}`)
                     mute(user, authorcooldown, muterole)
                     if (logsmod) logsmod.send(
-                        new Discord.MessageEmbed()
+                        new Discord.EmbedBuilder()
                         .setColor(color)
                         .setDescription(`${message.author} a **mute** ${user}`)
 

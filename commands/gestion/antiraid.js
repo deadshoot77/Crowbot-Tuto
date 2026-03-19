@@ -1,11 +1,11 @@
-const Discord = require('discord.js')
+const Discord = require('../../util/compat/discord.js')
 const db = require('quick.db')
 const {
 	MessageActionRow,
 	MessageButton,
 	MessageMenuOption,
 	MessageMenu
-} = require('discord-buttons');
+} = require('../../util/compat/discord-components.js');
 
 function onoff(antiraid) {
 	if (antiraid === null) return "`❌`"
@@ -245,7 +245,7 @@ module.exports = {
 						if (button.id === message.id + "addrole") {
 
 							button.reply.defer(true)
-							const embedantiraid = new Discord.MessageEmbed()
+							const embedantiraid = new Discord.EmbedBuilder()
 								.setColor(color)
 								.setDescription(`
 1️ ・ Modifier l'activité 
@@ -397,7 +397,7 @@ module.exports = {
 						if (button.id === message.id + "roledel") {
 
 							button.reply.defer(true)
-							const embedantiraid = new Discord.MessageEmbed()
+							const embedantiraid = new Discord.EmbedBuilder()
 								.setColor(color)
 								.setDescription(`
 1️ ・ Modifier l'activité 
@@ -549,7 +549,7 @@ module.exports = {
 						if (button.id === message.id + "rolemodif") {
 
 							button.reply.defer(true)
-							const embedantiraid = new Discord.MessageEmbed()
+							const embedantiraid = new Discord.EmbedBuilder()
 								.setColor(color)
 								.setDescription(`
 1️ ・ Modifier l'activité 
@@ -701,7 +701,7 @@ module.exports = {
 						if (button.id === message.id + "rolecreate") {
 
 							button.reply.defer(true)
-							const embedantiraid = new Discord.MessageEmbed()
+							const embedantiraid = new Discord.EmbedBuilder()
 								.setColor(color)
 								.setDescription(`
 1️ ・ Modifier l'activité 
@@ -853,7 +853,7 @@ module.exports = {
 						if (button.id === message.id + "webhook") {
 
 							button.reply.defer(true)
-							const embedantiraid = new Discord.MessageEmbed()
+							const embedantiraid = new Discord.EmbedBuilder()
 								.setColor(color)
 								.setDescription(`
 1️ ・ Modifier l'activité 
@@ -1005,7 +1005,7 @@ module.exports = {
 						if (button.id === message.id + "update") {
 
 							button.reply.defer(true)
-							const embedantiraid = new Discord.MessageEmbed()
+							const embedantiraid = new Discord.EmbedBuilder()
 								.setColor(color)
 								.setDescription(`
 1️ ・ Modifier l'activité 
@@ -1157,7 +1157,7 @@ module.exports = {
 						if (button.id === message.id + "channelcreate") {
 
 							button.reply.defer(true)
-							const embedantiraid = new Discord.MessageEmbed()
+							const embedantiraid = new Discord.EmbedBuilder()
 								.setColor(color)
 								.setDescription(`
 1️ ・ Modifier l'activité 
@@ -1309,7 +1309,7 @@ module.exports = {
 						if (button.id === message.id + "channelmodif") {
 
 							button.reply.defer(true)
-							const embedantiraid = new Discord.MessageEmbed()
+							const embedantiraid = new Discord.EmbedBuilder()
 								.setColor(color)
 								.setDescription(`
 1️ ・ Modifier l'activité 
@@ -1461,7 +1461,7 @@ module.exports = {
 						if (button.id === message.id + "antiban") {
 
 							button.reply.defer(true)
-							const embedantiraid = new Discord.MessageEmbed()
+							const embedantiraid = new Discord.EmbedBuilder()
 								.setColor(color)
 								.setDescription(`
 1️ ・ Modifier l'activité 
@@ -1662,7 +1662,7 @@ module.exports = {
 						if (button.id === message.id + "antilink") {
 
 							button.reply.defer(true)
-							const embedantiraid = new Discord.MessageEmbed()
+							const embedantiraid = new Discord.EmbedBuilder()
 								.setColor(color)
 								.setDescription(`
 1️ ・ Modifier l'activité 
@@ -1822,7 +1822,7 @@ module.exports = {
 						if (button.id === message.id + "antimassjoin") {
 
 							button.reply.defer(true)
-							const embedantiraid = new Discord.MessageEmbed()
+							const embedantiraid = new Discord.EmbedBuilder()
 								.setColor(color)
 								.setDescription(`
 1️ ・ Modifier l'activité 
@@ -1950,7 +1950,7 @@ module.exports = {
 						if (button.id === message.id + "antitoken") {
 
 							button.reply.defer(true)
-							const embedantiraid = new Discord.MessageEmbed()
+							const embedantiraid = new Discord.EmbedBuilder()
 								.setColor(color)
 								.setDescription(`
 1️ ・ Modifier l'activité 
@@ -2064,7 +2064,7 @@ module.exports = {
 						if (button.id === message.id + "antideco") {
 
 							button.reply.defer(true)
-							const embedantiraid = new Discord.MessageEmbed()
+							const embedantiraid = new Discord.EmbedBuilder()
 								.setColor(color)
 								.setDescription(`
 1️ ・ Modifier l'activité 
@@ -2265,7 +2265,7 @@ module.exports = {
 						if (button.id === message.id + "channeldel") {
 
 							button.reply.defer(true)
-							const embedantiraid = new Discord.MessageEmbed()
+							const embedantiraid = new Discord.EmbedBuilder()
 								.setColor(color)
 								.setDescription(`
 1️ ・ Modifier l'activité 
@@ -2417,7 +2417,7 @@ module.exports = {
 						if (button.id === message.id + "antibot") {
 
 							button.reply.defer(true)
-							const embedantiraid = new Discord.MessageEmbed()
+							const embedantiraid = new Discord.EmbedBuilder()
 								.setColor(color)
 								.setDescription(`
 1️ ・ Modifier l'activité 
@@ -2728,7 +2728,7 @@ module.exports = {
 				.setStyle("gray")
 				.setID(message.id + "antilink")
 				.setEmoji("5️⃣")
-			let embed2 = new Discord.MessageEmbed()
+			let embed2 = new Discord.EmbedBuilder()
 			embed2.setTitle(`Configuration des modules d'antiraid`)
 				.setColor(color)
 				.setDescription(`
@@ -2874,7 +2874,7 @@ module.exports = {
 				.setStyle("gray")
 				.setID(message.id + "return25")
 				.setLabel("▶")
-			let embed2 = new Discord.MessageEmbed()
+			let embed2 = new Discord.EmbedBuilder()
 			embed2.setTitle(`Configuration des modules d'antiraid`)
 				.setColor(color)
 				.setDescription(`
@@ -2992,7 +2992,7 @@ module.exports = {
 			const antitoken = db.get(`crealimit_${message.guild.id}`)
 			const antitoken2 = db.get(`crealimittemps_${message.guild.id}`) || "0s"
 
-			let embed = new Discord.MessageEmbed();
+			let embed = new Discord.EmbedBuilder();
 			embed.setTitle(`Configuration des modules d'antiraid`)
 				.setColor(color)
 				.setDescription(`

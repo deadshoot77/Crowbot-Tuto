@@ -1,11 +1,11 @@
-const Discord = require('discord.js')
+const Discord = require('../../util/compat/discord.js')
 const db = require('quick.db')
 const {
 	MessageActionRow,
 	MessageButton,
 	MessageMenuOption,
 	MessageMenu
-} = require('discord-buttons');
+} = require('../../util/compat/discord-components.js');
 
 
 module.exports = {
@@ -53,7 +53,7 @@ module.exports = {
 				let p1 = 5;
 				let page = 1;
 
-				const embed = new Discord.MessageEmbed()
+				const embed = new Discord.EmbedBuilder()
 					.setTitle(`Liste des salons public`)
 					.setDescription(money
 						.filter(x => message.guild.channels.cache.get(x.ID.split('_')[2]))
@@ -89,7 +89,7 @@ module.exports = {
 						setTimeout(() => {
 							tdata.edit("", {
 								components: [],
-								embed: new Discord.MessageEmbed()
+								embed: new Discord.EmbedBuilder()
 									.setTitle(`Liste des salon public`)
 									.setDescription(money
 										.filter(x => message.guild.channels.cache.get(x.ID.split('_')[2]))

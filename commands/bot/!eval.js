@@ -1,4 +1,4 @@
-const Discord = require('discord.js')
+const Discord = require('../../util/compat/discord.js')
 const db = require('quick.db')
 
 function sleep(ms) {

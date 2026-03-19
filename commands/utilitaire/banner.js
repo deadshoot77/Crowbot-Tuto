@@ -1,4 +1,4 @@
-const Discord = require('discord.js')
+const Discord = require('../../util/compat/discord.js')
 const db = require('quick.db')
 const axios = require("axios");
 const {
@@ -6,7 +6,7 @@ const {
 	MessageButton,
 	MessageMenuOption,
 	MessageMenu
-} = require('discord-buttons');
+} = require('../../util/compat/discord-components.js');
 
 module.exports = {
 	name: 'banner',
@@ -25,7 +25,7 @@ module.exports = {
 				size: 4096
 			});
 			if (bannerUrl) {
-				const Embed = new Discord.MessageEmbed()
+				const Embed = new Discord.EmbedBuilder()
 				Embed.setTitle(`Cette Bannière Et Incroyable !!!`);
 				Embed.setDescription(`Voici La Bannière De <@${member.id}>`)
 				Embed.setImage(`${bannerUrl}`);
@@ -34,7 +34,7 @@ module.exports = {
 				Embed.setColor(color)
 				message.channel.send(Embed)
 			} else {
-				const Embed = new Discord.MessageEmbed()
+				const Embed = new Discord.EmbedBuilder()
 				Embed.setTitle(`${member.username}`);
 				Embed.setDescription(`<@${member.id}> Ne Possédez Pas De Bannière`);
 				Embed.setFooter(`${client.config.name}`)

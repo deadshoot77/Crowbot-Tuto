@@ -1,4 +1,4 @@
-const Discord = require("discord.js");
+const Discord = require('../../util/compat/discord.js');
 const db = require('quick.db')
 const canvacord = require("canvacord");
 
@@ -45,7 +45,7 @@ module.exports = {
 			if (msg.content.includes("discord.gg/")) snipe = msg.content.replace(msg.content.split("gg/")[1], slm(msg.content.split("gg/")[1].length || 0))
 
 			// ●●●●●●●●
-			const embed = new Discord.MessageEmbed()
+			const embed = new Discord.EmbedBuilder()
 				.setAuthor(msg.author.username, msg.author.displayAvatarURL({
 					dynamic: true
 				}))

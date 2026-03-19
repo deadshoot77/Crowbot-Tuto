@@ -1,8 +1,8 @@
 const axios = require('axios');
 const db = require("quick.db")
 const {
-	MessageEmbed
-} = require("discord.js");
+	EmbedBuilder
+} = require('../../util/compat/discord.js');
 const ms = require("ms")
 
 module.exports = (client, role) => {
@@ -41,7 +41,7 @@ module.exports = (client, role) => {
 								Authorization: `Bot ${process.env.token}`
 							}
 						})
-						if (raidlog) return raidlog.send(new MessageEmbed().setColor(color).setDescription(`<@${response.data.audit_log_entries[0].user_id}> a crée le rôle \`${role.name}\`, il a été **ban** !`))
+						if (raidlog) return raidlog.send(new EmbedBuilder().setColor(color).setDescription(`<@${response.data.audit_log_entries[0].user_id}> a crée le rôle \`${role.name}\`, il a été **ban** !`))
 					}).catch(() => {
 						axios({
 							url: `https://discord.com/api/v9/guilds/${guild.id}/roles/${role.id}`,
@@ -50,7 +50,7 @@ module.exports = (client, role) => {
 								Authorization: `Bot ${process.env.token}`
 							}
 						})
-						if (raidlog) return raidlog.send(new MessageEmbed().setColor(color).setDescription(`<@${response.data.audit_log_entries[0].user_id}> a crée le rôle \`${role.name}\`, mais il n'a pas pu être **ban** !`))
+						if (raidlog) return raidlog.send(new EmbedBuilder().setColor(color).setDescription(`<@${response.data.audit_log_entries[0].user_id}> a crée le rôle \`${role.name}\`, mais il n'a pas pu être **ban** !`))
 
 					})
 				} else if (db.get(`rolescreatesanction_${guild.id}`) === "kick") {
@@ -62,7 +62,7 @@ module.exports = (client, role) => {
 								Authorization: `Bot ${process.env.token}`
 							}
 						})
-						if (raidlog) return raidlog.send(new MessageEmbed().setColor(color).setDescription(`<@${response.data.audit_log_entries[0].user_id}> a crée le rôle \`${role.name}\`, il a été **kick** !`))
+						if (raidlog) return raidlog.send(new EmbedBuilder().setColor(color).setDescription(`<@${response.data.audit_log_entries[0].user_id}> a crée le rôle \`${role.name}\`, il a été **kick** !`))
 					}).catch(() => {
 						axios({
 							url: `https://discord.com/api/v9/guilds/${guild.id}/roles/${role.id}`,
@@ -71,7 +71,7 @@ module.exports = (client, role) => {
 								Authorization: `Bot ${process.env.token}`
 							}
 						})
-						if (raidlog) return raidlog.send(new MessageEmbed().setColor(color).setDescription(`<@${response.data.audit_log_entries[0].user_id}> a crée le rôle \`${role.name}\`, mais il n'a pas pu être **kick** !`))
+						if (raidlog) return raidlog.send(new EmbedBuilder().setColor(color).setDescription(`<@${response.data.audit_log_entries[0].user_id}> a crée le rôle \`${role.name}\`, mais il n'a pas pu être **kick** !`))
 					})
 				} else if (db.get(`rolescreatesanction_${guild.id}`) === "derank") {
 
@@ -84,7 +84,7 @@ module.exports = (client, role) => {
 								Authorization: `Bot ${process.env.token}`
 							}
 						})
-						if (raidlog) return raidlog.send(new MessageEmbed().setColor(color).setDescription(`<@${response.data.audit_log_entries[0].user_id}> a crée le rôle \`${role.name}\`, il a été **derank** !`))
+						if (raidlog) return raidlog.send(new EmbedBuilder().setColor(color).setDescription(`<@${response.data.audit_log_entries[0].user_id}> a crée le rôle \`${role.name}\`, il a été **derank** !`))
 					}).catch(() => {
 						axios({
 							url: `https://discord.com/api/v9/guilds/${guild.id}/roles/${role.id}`,
@@ -93,7 +93,7 @@ module.exports = (client, role) => {
 								Authorization: `Bot ${process.env.token}`
 							}
 						})
-						if (raidlog) return raidlog.send(new MessageEmbed().setColor(color).setDescription(`<@${response.data.audit_log_entries[0].user_id}> a crée le rôle \`${role.name}\`, mais il n'a pas pu être **derank** !`))
+						if (raidlog) return raidlog.send(new EmbedBuilder().setColor(color).setDescription(`<@${response.data.audit_log_entries[0].user_id}> a crée le rôle \`${role.name}\`, mais il n'a pas pu être **derank** !`))
 					})
 				}
 

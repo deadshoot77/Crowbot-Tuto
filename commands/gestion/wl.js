@@ -1,11 +1,11 @@
-const Discord = require('discord.js')
+const Discord = require('../../util/compat/discord.js')
 const db = require('quick.db')
 const {
 	MessageActionRow,
 	MessageButton,
 	MessageMenuOption,
 	MessageMenu
-} = require('discord-buttons');
+} = require('../../util/compat/discord-components.js');
 
 
 module.exports = {
@@ -72,7 +72,7 @@ module.exports = {
 				let p1 = 5;
 				let page = 1;
 
-				const embed = new Discord.MessageEmbed()
+				const embed = new Discord.EmbedBuilder()
 					.setTitle('Whitelist')
 					.setDescription(!money ? "Aucune donnée" : money
 
@@ -107,7 +107,7 @@ module.exports = {
 						setTimeout(() => {
 							tdata.edit("", {
 								components: [],
-								embed: new Discord.MessageEmbed()
+								embed: new Discord.EmbedBuilder()
 									.setTitle('Whitelist')
 									.setDescription(money
 										.filter(x => message.guild.members.cache.get(x.ID.split('_')[2]))
